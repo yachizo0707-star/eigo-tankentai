@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英語たんけん隊｜NEW TREASURE Stage1</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+:root {
+  --sky: #E8F4FD;
+  --ocean: #2563EB;
+  --ocean-light: #3B82F6;
+  --sun: #F59E0B;
+  --grass: #10B981;
+  --coral: #EF4444;
+  --purple: #8B5CF6;
+  --white: #FFFFFF;
+  --ink: #1E293B;
+  --muted: #64748B;
+  --border: #CBD5E1;
+  --card-bg: #FFFFFF;
+  --page-bg: #F0F7FF;
+
+  --c-s: #2563EB;
+  --c-v: #EF4444;
+  --c-o: #10B981;
+  --c-q: #8B5CF6;
+  --c-n: #F59E0B;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--page-bg);
+  color: var(--ink);
+  display: flex; flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.app-header {
+  background: var(--ocean);
+  color: white;
+  padding: 0;
+  display: flex; flex-direction: column;
+}
+.header-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px 8px;
+}
+.app-logo {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.15rem; font-weight: 900;
+  letter-spacing: -0.3px;
+}
+.header-streak {
+  background: rgba(255,255,255,0.15);
+  border-radius: 100px;
+  padding: 4px 12px;
+  font-size: 0.75rem; font-weight: 700;
+  display: flex; align-items: center; gap: 5px;
+}
+
+/* Nav tabs */
+.nav-tabs {
+  display: flex;
+  background: rgba(0,0,0,0.15);
+  overflow-x: auto; scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex: 0 0 auto;
+  padding: 9px 14px 8px;
+  border: none; background: transparent;
+  color: rgba(255,255,255,0.6);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.75rem; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: all 0.18s;
+  display: flex; align-items: center; gap: 5px;
+}
+.nav-tab.active { color: white; border-bottom-color: var(--sun); }
+
+/* ===== MAIN ===== */
+.main { flex: 1; overflow: hidden; display: flex; }
+.page { display: none; flex: 1; overflow-y: auto; }
+.page.active { display: block; }
+
+/* ===== HOME PAGE ===== */
+.home-hero {
+  background: linear-gradient(160deg, var(--ocean) 0%, #1D4ED8 100%);
+  color: white; padding: 24px 20px 28px; text-align: center;
+}
+.home-hero h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.5rem; font-weight: 900; margin-bottom: 6px;
+}
+.home-hero p { font-size: 0.82rem; opacity: 0.85; }
+
+.progress-ring-wrap { display: flex; justify-content: center; margin: 16px 0 8px; }
+.progress-ring { position: relative; width: 100px; height: 100px; }
+.progress-ring svg { transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: rgba(255,255,255,0.2); stroke-width: 8; }
+.ring-fill { fill: none; stroke: var(--sun); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+.ring-label {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-family: 'Nunito', sans-serif;
+}
+.ring-num { font-size: 1.5rem; font-weight: 900; color: white; }
+.ring-sub { font-size: 0.6rem; color: rgba(255,255,255,0.7); font-weight: 700; letter-spacing: 0.5px; }
+
+.home-cards { padding: 16px; display: grid; gap: 12px; }
+.home-card {
+  background: var(--card-bg); border-radius: 16px;
+  padding: 16px; border: 1px solid var(--border);
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+.home-card:active { transform: scale(0.98); }
+.home-card-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; flex: 0 0 52px;
+}
+.home-card-body { flex: 1; }
+.home-card-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 2px; }
+.home-card-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+.home-card-arrow { color: var(--border); font-size: 1.1rem; }
+
+/* ===== TODAY'S SENTENCE ===== */
+.daily-wrap { padding: 16px; }
+.daily-card {
+  background: linear-gradient(135deg, #1D4ED8, var(--ocean-light));
+  border-radius: 20px; padding: 22px 20px;
+  color: white; margin-bottom: 16px; text-align: center;
+}
+.daily-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; opacity: 0.75; margin-bottom: 10px; }
+.daily-en {
+  font-family: 'Nunito', sans-serif; font-size: 1.4rem; font-weight: 900;
+  margin-bottom: 8px; line-height: 1.4;
+}
+.daily-ja { font-size: 0.82rem; opacity: 0.85; margin-bottom: 14px; }
+.daily-pattern {
+  background: rgba(255,255,255,0.15); border-radius: 10px;
+  padding: 8px 14px; font-size: 0.75rem; font-weight: 700;
+  display: inline-block;
+}
+.daily-actions { display: flex; gap: 10px; justify-content: center; margin-top: 14px; }
+.daily-btn {
+  padding: 9px 18px; border: none; border-radius: 100px;
+  font-family: 'Noto Sans JP', sans-serif; font-size: 0.78rem; font-weight: 700;
+  cursor: pointer; transition: opacity 0.15s;
+}
+.daily-btn:active { opacity: 0.8; }
+.daily-btn-speak { background: var(--sun); color: white; }
+.daily-btn-next { background: rgba(255,255,255,0.2); color: white; }
+
+.daily-tip {
+  background: var(--card-bg); border-radius: 14px;
+  padding: 14px 16px; border: 1px solid var(--border);
+  font-size: 0.8rem; line-height: 1.7;
+}
+.daily-tip-title { font-weight: 700; color: var(--ocean); margin-bottom: 6px; font-size: 0.82rem; }
+
+/* ===== STEPS PAGE ===== */
+.steps-sidebar-wrap { display: flex; height: 100%; }
+.steps-sidebar {
+  width: 200px; min-width: 200px;
+  background: white; border-right: 1px solid var(--border);
+  overflow-y: auto; padding: 10px 0;
+  flex: 0 0 200px;
+}
+.sidebar-lesson-hd {
+  padding: 6px 12px 2px;
+  font-size: 0.62rem; font-weight: 700;
+  color: var(--muted); letter-spacing: 1.5px;
+  text-transform: uppercase; margin-top: 8px;
+}
+.sbtn {
+  display: flex; align-items: center; gap: 7px;
+  width: 100%; padding: 7px 12px;
+  border: none; background: transparent; text-align: left;
+  cursor: pointer; transition: background 0.12s;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.sbtn:hover { background: var(--sky); }
+.sbtn.active { background: #EFF6FF; border-right: 3px solid var(--ocean); }
+.sbtn-num {
+  flex: 0 0 24px; height: 24px; border-radius: 50%;
+  background: #E2E8F0; color: var(--muted);
+  font-family: 'Nunito', sans-serif; font-size: 0.7rem; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+}
+.sbtn.active .sbtn-num { background: var(--ocean); color: white; }
+.sbtn.done .sbtn-num { background: var(--grass); color: white; }
+.sbtn-label { font-size: 0.72rem; font-weight: 500; line-height: 1.3; color: var(--ink); }
+
+.steps-content { flex: 1; overflow-y: auto; padding: 18px 16px 60px; }
+
+/* Step panel */
+.step-panel { display: none; }
+.step-panel.active { display: block; }
+
+.sp-lesson-tag {
+  display: inline-block; background: var(--ocean); color: white;
+  font-size: 0.63rem; font-weight: 700; letter-spacing: 1px;
+  padding: 3px 10px; border-radius: 100px; margin-bottom: 8px;
+}
+.sp-title { font-family: 'Nunito', sans-serif; font-size: 1.15rem; font-weight: 900; line-height: 1.3; }
+.sp-sub { font-size: 0.75rem; color: var(--muted); margin-top: 3px; margin-bottom: 14px; }
+
+.legend {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  background: var(--card-bg); border-radius: 10px;
+  padding: 9px 12px; margin-bottom: 12px;
+  border: 1px solid var(--border); font-size: 0.7rem;
+}
+.legend-item { display: flex; align-items: center; gap: 4px; }
+.ldot { width: 9px; height: 9px; border-radius: 50%; }
+
+.formula {
+  background: #EFF6FF; border: 1.5px solid #BFDBFE;
+  border-radius: 12px; padding: 11px 14px;
+  font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 800;
+  margin-bottom: 12px; line-height: 1.6;
+}
+
+.ex-label { font-size: 0.68rem; font-weight: 700; color: var(--muted); margin-bottom: 5px; padding-left: 2px; }
+.sent-row {
+  display: flex; flex-wrap: wrap; gap: 3px; align-items: center;
+  padding: 7px 11px; background: var(--page-bg);
+  border-radius: 9px; margin-bottom: 4px;
+  font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 700;
+}
+.sent-ja { font-family: 'Noto Sans JP', sans-serif; font-size: 0.68rem; color: var(--muted); margin-bottom: 7px; padding-left: 4px; }
+.cmp-row { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; background: var(--page-bg); border-radius: 9px; padding: 7px 11px; margin-bottom: 4px; }
+.arrow { color: var(--muted); font-size: 0.8rem; }
+
+.w { display: inline-block; padding: 2px 6px; border-radius: 5px; font-size: 0.85rem; }
+.w-s { background: #DBEAFE; color: var(--c-s); }
+.w-v { background: #FEE2E2; color: var(--c-v); }
+.w-o { background: #D1FAE5; color: var(--c-o); }
+.w-q { background: #EDE9FE; color: var(--c-q); }
+.w-n { background: #FEF3C7; color: var(--c-n); }
+.w-p { color: var(--muted); font-size: 0.82rem; }
+.w-gray { background: #F1F5F9; color: #64748B; }
+
+.notice {
+  background: #FFFBEB; border-left: 4px solid var(--sun);
+  border-radius: 0 9px 9px 0; padding: 10px 13px;
+  font-size: 0.77rem; margin-top: 10px; line-height: 1.7;
+}
+.notice strong { color: #92400E; }
+
+/* Speak button in step */
+.speak-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; background: var(--ocean); color: white;
+  border: none; border-radius: 100px; font-size: 0.75rem; font-weight: 700;
+  cursor: pointer; margin: 10px 0 4px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* Quiz */
+.quiz-wrap { margin-top: 18px; }
+.quiz-hd { font-size: 0.68rem; font-weight: 700; color: var(--muted); margin-bottom: 8px; letter-spacing: 1px; }
+.quiz-card {
+  background: var(--card-bg); border-radius: 12px;
+  border: 1px solid var(--border); padding: 13px 14px; margin-bottom: 9px;
+}
+.quiz-num { font-size: 0.65rem; font-weight: 700; color: var(--ocean); margin-bottom: 5px; }
+.quiz-prompt { font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 700; margin-bottom: 7px; }
+.blank-line { display: inline-block; border-bottom: 2px solid var(--ocean); min-width: 65px; height: 1.2em; vertical-align: bottom; }
+.qi {
+  border: 2px solid var(--border); border-radius: 8px;
+  padding: 7px 11px; width: 100%;
+  font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 700;
+  outline: none; color: var(--ink); transition: border-color 0.18s;
+}
+.qi:focus { border-color: var(--ocean); }
+.qi.ok { border-color: var(--grass); background: #F0FDF4; color: var(--grass); }
+.qi.ng { border-color: var(--coral); background: #FEF2F2; }
+.quiz-hint { font-size: 0.68rem; color: var(--muted); margin-top: 3px; }
+.quiz-ans-row { display: none; margin-top: 6px; padding: 5px 11px; background: #F0FDF4; border-radius: 7px; font-size: 0.8rem; font-weight: 700; color: var(--grass); }
+.quiz-ans-row.show { display: block; }
+
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.btn {
+  padding: 8px 18px; border: none; border-radius: 100px;
+  font-family: 'Noto Sans JP', sans-serif; font-size: 0.76rem; font-weight: 700;
+  cursor: pointer; transition: opacity 0.15s, transform 0.1s;
+}
+.btn:active { transform: scale(0.97); }
+.btn-blue { background: var(--ocean); color: white; }
+.btn-green { background: var(--grass); color: white; }
+.btn-ghost { background: var(--page-bg); color: var(--ocean); border: 2px solid var(--border); }
+.score-badge { display: none; background: var(--ocean); color: white; border-radius: 100px; padding: 5px 16px; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 0.9rem; margin-top: 10px; }
+.score-badge.show { display: inline-block; }
+.step-nav { display: flex; justify-content: space-between; margin-top: 20px; }
+
+/* ===== FLASHCARD PAGE ===== */
+.fc-wrap { padding: 16px; }
+.fc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.fc-title { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 900; }
+.fc-count { font-size: 0.75rem; color: var(--muted); font-weight: 700; }
+
+.fc-card-wrap { perspective: 1000px; margin-bottom: 16px; }
+.fc-card {
+  width: 100%; min-height: 180px;
+  position: relative; cursor: pointer;
+  transform-style: preserve-3d; transition: transform 0.45s ease;
+}
+.fc-card.flipped { transform: rotateY(180deg); }
+.fc-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  border-radius: 20px; padding: 28px 24px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; min-height: 180px;
+}
+.fc-front { background: linear-gradient(135deg, var(--ocean), #1D4ED8); color: white; }
+.fc-back { background: var(--card-bg); border: 2px solid var(--border); transform: rotateY(180deg); }
+.fc-en { font-family: 'Nunito', sans-serif; font-size: 1.6rem; font-weight: 900; margin-bottom: 6px; }
+.fc-hint { font-size: 0.72rem; opacity: 0.7; }
+.fc-ja-word { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+.fc-ex { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+.fc-tap { font-size: 0.7rem; opacity: 0.6; margin-top: 10px; }
+
+.fc-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.fc-btn {
+  padding: 10px 22px; border: none; border-radius: 100px;
+  font-family: 'Noto Sans JP', sans-serif; font-size: 0.78rem; font-weight: 700;
+  cursor: pointer; transition: opacity 0.15s, transform 0.1s;
+}
+.fc-btn:active { transform: scale(0.97); }
+.fc-ok { background: var(--grass); color: white; }
+.fc-ng { background: var(--coral); color: white; }
+.fc-skip { background: var(--page-bg); color: var(--muted); border: 2px solid var(--border); }
+
+.fc-progress { margin-bottom: 12px; }
+.fc-prog-bar { background: var(--border); border-radius: 100px; height: 6px; overflow: hidden; }
+.fc-prog-fill { height: 100%; background: var(--grass); border-radius: 100px; transition: width 0.3s; }
+.fc-prog-label { font-size: 0.68rem; color: var(--muted); margin-top: 4px; }
+
+.fc-result {
+  display: none; background: var(--card-bg); border-radius: 16px;
+  padding: 24px; text-align: center; border: 1px solid var(--border);
+}
+.fc-result.show { display: block; }
+.fc-result-emoji { font-size: 2.5rem; margin-bottom: 10px; }
+.fc-result-title { font-family: 'Nunito', sans-serif; font-size: 1.2rem; font-weight: 900; margin-bottom: 6px; }
+.fc-result-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 16px; }
+
+/* ===== REVIEW PAGE ===== */
+.review-wrap { padding: 16px; }
+.review-empty {
+  text-align: center; padding: 40px 20px;
+  color: var(--muted); font-size: 0.85rem;
+}
+.review-empty-icon { font-size: 2.5rem; margin-bottom: 10px; }
+.review-card {
+  background: var(--card-bg); border-radius: 14px;
+  border: 1px solid var(--border); padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.review-q { font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+.review-a { font-size: 0.78rem; color: var(--muted); }
+.review-a strong { color: var(--grass); }
+.review-input {
+  border: 2px solid var(--border); border-radius: 8px;
+  padding: 7px 11px; width: 100%;
+  font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 700;
+  outline: none; margin-top: 6px; color: var(--ink);
+}
+.review-input.ok { border-color: var(--grass); background: #F0FDF4; color: var(--grass); }
+.review-input.ng { border-color: var(--coral); background: #FEF2F2; }
+
+@media (max-width: 600px) {
+  .steps-sidebar { width: 170px; min-width: 170px; flex: 0 0 170px; }
+}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="header-top">
+    <div class="app-logo">🔍 英語たんけん隊</div>
+    <div class="header-streak" id="streak-display">🔥 0日連続</div>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchPage('home')">🏠 ホーム</button>
+    <button class="nav-tab" onclick="switchPage('daily')">☀️ 今日の1文</button>
+    <button class="nav-tab" onclick="switchPage('steps')">📚 30ステップ</button>
+    <button class="nav-tab" onclick="switchPage('flash')">🃏 単語カード</button>
+    <button class="nav-tab" onclick="switchPage('review')">⚠️ 苦手ノート</button>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ===== HOME ===== -->
+<div class="page active" id="page-home">
+  <div class="home-hero">
+    <h2>今日も英語に挑戦しよう！</h2>
+    <p>NEW TREASURE Stage1 ｜ Lesson 1〜12</p>
+    <div class="progress-ring-wrap">
+      <div class="progress-ring">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle class="ring-bg" cx="50" cy="50" r="40"/>
+          <circle class="ring-fill" id="ring-fill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"/>
+        </svg>
+        <div class="ring-label">
+          <span class="ring-num" id="ring-num">0</span>
+          <span class="ring-sub">/ 30 完了</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="home-cards">
+    <div class="home-card" onclick="switchPage('daily')">
+      <div class="home-card-icon" style="background:#EFF6FF">☀️</div>
+      <div class="home-card-body">
+        <div class="home-card-title">今日の1文</div>
+        <div class="home-card-desc">毎日1パターンをランダムで確認。声に出して読もう！</div>
+      </div>
+      <div class="home-card-arrow">›</div>
+    </div>
+    <div class="home-card" onclick="switchPage('steps')">
+      <div class="home-card-icon" style="background:#EFF6FF">📚</div>
+      <div class="home-card-body">
+        <div class="home-card-title">30ステップで学ぶ</div>
+        <div class="home-card-desc">Lesson1から順番に文法パターンを色分けで発見！</div>
+      </div>
+      <div class="home-card-arrow">›</div>
+    </div>
+    <div class="home-card" onclick="switchPage('flash')">
+      <div class="home-card-icon" style="background:#F0FDF4">🃏</div>
+      <div class="home-card-body">
+        <div class="home-card-title">単語カード</div>
+        <div class="home-card-desc">Stage1の重要単語をフラッシュカードで覚えよう！</div>
+      </div>
+      <div class="home-card-arrow">›</div>
+    </div>
+    <div class="home-card" onclick="switchPage('review')">
+      <div class="home-card-icon" style="background:#FEF2F2">⚠️</div>
+      <div class="home-card-body">
+        <div class="home-card-title">苦手ノート</div>
+        <div class="home-card-desc">間違えた問題だけ集めて集中復習！</div>
+      </div>
+      <div class="home-card-arrow">›</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DAILY ===== -->
+<div class="page" id="page-daily">
+  <div class="daily-wrap">
+    <div class="daily-card">
+      <div class="daily-label">TODAY'S PATTERN</div>
+      <div class="daily-en" id="daily-en">I am Ken.</div>
+      <div class="daily-ja" id="daily-ja">わたしはケンです。</div>
+      <div class="daily-pattern" id="daily-pattern">📌 be動詞：I am 〜</div>
+      <div class="daily-actions">
+        <button class="daily-btn daily-btn-speak" onclick="speakText(document.getElementById('daily-en').textContent)">🔊 声に出す</button>
+        <button class="daily-btn daily-btn-next" onclick="nextDaily()">次の文 →</button>
+      </div>
+    </div>
+    <div class="daily-tip">
+      <div class="daily-tip-title" id="daily-tip-title">💡 今日のポイント</div>
+      <div id="daily-tip-body">「I（わたし）」のときだけ am を使います。You→are、He/She→is と変わります。今日はこの文を10回声に出して読んでみよう！</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STEPS ===== -->
+<div class="page" id="page-steps">
+  <div class="steps-sidebar-wrap">
+    <div class="steps-sidebar" id="steps-sidebar"></div>
+    <div class="steps-content" id="steps-content"></div>
+  </div>
+</div>
+
+<!-- ===== FLASHCARD ===== -->
+<div class="page" id="page-flash">
+  <div class="fc-wrap">
+    <div class="fc-header">
+      <div class="fc-title">🃏 単語カード</div>
+      <div class="fc-count" id="fc-count">1 / 30</div>
+    </div>
+    <div class="fc-progress">
+      <div class="fc-prog-bar"><div class="fc-prog-fill" id="fc-prog" style="width:0%"></div></div>
+      <div class="fc-prog-label" id="fc-prog-label">0 / 30 完了</div>
+    </div>
+    <div class="fc-card-wrap">
+      <div class="fc-card" id="fc-card" onclick="flipCard()">
+        <div class="fc-face fc-front">
+          <div class="fc-en" id="fc-en">like</div>
+          <div class="fc-hint" id="fc-hint">動詞</div>
+          <div class="fc-tap">タップして意味を見る 👆</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-ja-word" id="fc-ja">〜が好きだ</div>
+          <div class="fc-ex" id="fc-ex">I like soccer.<br>わたしはサッカーが好きです。</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-actions">
+      <button class="fc-btn fc-ng" onclick="fcAnswer(false)">✗ もう一度</button>
+      <button class="fc-btn fc-skip" onclick="fcAnswer(null)">→ スキップ</button>
+      <button class="fc-btn fc-ok" onclick="fcAnswer(true)">✓ 覚えた！</button>
+    </div>
+    <div class="fc-result" id="fc-result">
+      <div class="fc-result-emoji" id="fc-result-emoji">🎉</div>
+      <div class="fc-result-title" id="fc-result-title">お疲れさま！</div>
+      <div class="fc-result-sub" id="fc-result-sub"></div>
+      <button class="btn btn-blue" onclick="resetFC()" style="margin-top:10px">もう一度やる</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== REVIEW ===== -->
+<div class="page" id="page-review">
+  <div class="review-wrap">
+    <div id="review-content"></div>
+  </div>
+</div>
+
+</div><!-- end main -->
+
+<script>
+// ===================== DATA =====================
+const lessons = [
+  { lesson:"Lesson 1", steps:[
+    { num:1, title:"be動詞①：I am 〜", sub:"「わたしは〜です」の基本",
+      formula:'<span style="color:var(--c-s)">I</span> ＋ <span style="color:var(--c-v)">am</span> ＋ <span style="color:var(--c-o)">〜</span>',
+      examples:[
+        {en:[["I","s"],["am","v"],["Ken","o"],[".","p"]], ja:"わたしはケンです。"},
+        {en:[["I","s"],["am","v"],["thirteen","o"],[".","p"]], ja:"わたしは13歳です。"},
+        {en:[["I","s"],["am","v"],["from Japan","o"],[".","p"]], ja:"わたしは日本出身です。"},
+      ],
+      notice:'<strong>✨ ポイント：</strong>「I（わたし）」のときだけ <strong>am</strong>。他の主語では使わない！',
+      quizzes:[{p:"I ___ Ken.",a:"am",h:"Iのときのbe動詞"},{p:"I ___ twelve.",a:"am",h:"Iのときのbe動詞"}]},
+    { num:2, title:"be動詞②：You are / He is", sub:"主語によってbe動詞が変わる",
+      formula:'<span style="color:var(--c-s)">You</span>＋<span style="color:var(--c-v)">are</span> ／ <span style="color:var(--c-s)">He/She</span>＋<span style="color:var(--c-v)">is</span>',
+      examples:[
+        {en:[["You","s"],["are","v"],["Yuki","o"],[".","p"]], ja:"あなたはユキです。"},
+        {en:[["He","s"],["is","v"],["my brother","o"],[".","p"]], ja:"彼はわたしの兄です。"},
+        {en:[["She","s"],["is","v"],["my friend","o"],[".","p"]], ja:"彼女はわたしの友達です。"},
+        {en:[["This","s"],["is","v"],["a cat","o"],[".","p"]], ja:"これはネコです。"},
+      ],
+      notice:'<strong>✨ まとめ：</strong>I→<strong>am</strong>　You→<strong>are</strong>　He/She/This→<strong>is</strong>。3パターン！',
+      quizzes:[{p:"She ___ my sister.",a:"is",h:"Sheのときのbe動詞"},{p:"You ___ my friend.",a:"are",h:"Youのときのbe動詞"}]},
+    { num:3, title:"be動詞③：疑問文", sub:"be動詞を文の先頭に移す",
+      formula:'<span style="color:var(--c-v)">Is/Are</span>＋<span style="color:var(--c-s)">主語</span>＋〜<span style="color:var(--c-q)">?</span>',
+      compare:true,
+      examples:[
+        {left:[["You","s"],["are","v"],["Ken","o"],[".",""]], right:[["Are","v"],["you","s"],["Ken","o"],["?",""]], ja:"あなたはケンですか？"},
+        {left:[["She","s"],["is","v"],["your friend","o"],[".",""]], right:[["Is","v"],["she","s"],["your friend","o"],["?",""]], ja:"彼女はあなたの友達ですか？"},
+      ],
+      notice:'<strong>✨ ルール：</strong>be動詞（is/are）を<strong>先頭に移動</strong>させるだけ！',
+      quizzes:[{p:"___ you Ken?",a:"Are",h:"youのbe動詞を先頭に"},{p:"___ this a book?",a:"Is",h:"thisのbe動詞を先頭に"}]},
+  ]},
+  { lesson:"Lesson 2", steps:[
+    { num:4, title:"be動詞④：否定文", sub:"be動詞の後ろにnotを置く",
+      formula:'<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-v)">am/is/are</span>＋<span style="color:var(--c-n)">not</span>＋〜',
+      examples:[
+        {en:[["I","s"],["am","v"],["not","n"],["a student","o"],[".","p"]], ja:"わたしは生徒ではありません。"},
+        {en:[["He","s"],["is","v"],["not","n"],["my brother","o"],[".","p"]], ja:"彼はわたしの兄ではありません。"},
+      ],
+      notice:'<strong>✨ ルール：</strong>be動詞の<strong>すぐ後ろ</strong>に not。isn\'t/aren\'t と縮めることも！',
+      quizzes:[{p:"I am ___ Ken.",a:"not",h:"否定のひとこと"},{p:"She is ___ tall.",a:"not",h:"be動詞の後ろに"}]},
+    { num:5, title:"代名詞：I/You/He/She", sub:"だれを指す言葉かを覚えよう",
+      formula:'<span style="color:var(--c-s)">主語</span>→<span style="color:var(--c-o)">目的語</span>の形も変わる',
+      examples:[
+        {en:[["I","s"],["→ me","o"]], ja:"わたし → わたしを/に"},
+        {en:[["He","s"],["→ him","o"]], ja:"彼 → 彼を/に"},
+        {en:[["She","s"],["→ her","o"]], ja:"彼女 → 彼女を/に"},
+      ],
+      notice:'<strong>✨ ポイント：</strong>「〜を」「〜に」のとき形が変わる。I like <strong>her</strong>. のように使う！',
+      quizzes:[{p:"I like ___. （彼女を）",a:"her",h:"sheの目的格"},{p:"This is ___. （彼を）",a:"him",h:"heの目的格"}]},
+    { num:6, title:"Yes/No の答え方", sub:"be動詞を使って短く答える",
+      formula:'Yes, <span style="color:var(--c-s)">主語</span><span style="color:var(--c-v)">am/is/are</span>. ／ No, 〜<span style="color:var(--c-n)">not</span>.',
+      examples:[
+        {en:[["Are you Ken?","gray"]], ja:"あなたはケンですか？"},
+        {en:[["Yes,","p"],["I","s"],["am","v"],[".","p"]], ja:"はい、そうです。"},
+        {en:[["No,","p"],["I","s"],["am","v"],["not","n"],[".","p"]], ja:"いいえ、違います。"},
+      ],
+      notice:'<strong>✨ ルール：</strong>Yes→主語＋be動詞。No→主語＋be動詞＋not！',
+      quizzes:[{p:"Are you Ken? → Yes, ___ ___.",a:"I am",h:"YesはI amで"},{p:"Is she tall? → No, she ___ ___.",a:"is not",h:"NoはnotをつけてもOK"}]},
+  ]},
+  { lesson:"Lesson 3", steps:[
+    { num:7, title:"一般動詞①：動作を表す言葉", sub:"like/play/study/eat/have",
+      formula:'<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-v)">動詞</span>＋<span style="color:var(--c-o)">〜</span>',
+      examples:[
+        {en:[["I","s"],["like","v"],["soccer","o"],[".","p"]], ja:"わたしはサッカーが好きです。"},
+        {en:[["I","s"],["play","v"],["the piano","o"],[".","p"]], ja:"わたしはピアノを弾きます。"},
+        {en:[["I","s"],["have","v"],["a dog","o"],[".","p"]], ja:"わたしは犬を飼っています。"},
+      ],
+      notice:'<strong>✨ ポイント：</strong>like/play/study… これが<strong>一般動詞</strong>。be動詞とは別グループ！',
+      quizzes:[{p:"I ___ soccer.（好き）",a:"like",h:"「好き」の動詞"},{p:"I ___ tennis.（する）",a:"play",h:"スポーツをするときの動詞"}]},
+    { num:8, title:"一般動詞②：Do疑問文", sub:"Doを文の先頭につける",
+      formula:'<span style="color:var(--c-q)">Do</span>＋<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-v)">動詞</span>＋〜<span style="color:var(--c-q)">?</span>',
+      compare:true,
+      examples:[
+        {left:[["I","s"],["like","v"],["cats","o"],[".",""]], right:[["Do","q"],["you","s"],["like","v"],["cats","o"],["?",""]], ja:"あなたはネコが好きですか？"},
+        {left:[["I","s"],["play","v"],["tennis","o"],[".",""]], right:[["Do","q"],["you","s"],["play","v"],["tennis","o"],["?",""]], ja:"あなたはテニスをしますか？"},
+      ],
+      notice:'<strong>✨ 比較：</strong>be動詞疑問文→be動詞を前へ。一般動詞疑問文→<strong>Doを前へ</strong>！',
+      quizzes:[{p:"___ you like cats?",a:"Do",h:"一般動詞の疑問文はこれで始まる"},{p:"___ you play soccer?",a:"Do",h:"一般動詞の疑問文"}]},
+    { num:9, title:"一般動詞③：don't否定", sub:"do notを動詞の前に置く",
+      formula:'<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-n)">don\'t</span>＋<span style="color:var(--c-v)">動詞</span>＋〜',
+      examples:[
+        {en:[["I","s"],["don't","n"],["like","v"],["math","o"],[".","p"]], ja:"わたしは数学が好きではありません。"},
+        {en:[["We","s"],["don't","n"],["study","v"],["French","o"],[".","p"]], ja:"わたしたちはフランス語を勉強しません。"},
+      ],
+      notice:'<strong>✨ 比較：</strong>be動詞否定→be動詞の後ろにnot。一般動詞否定→動詞の前に<strong>don\'t</strong>！',
+      quizzes:[{p:"I ___ like math.",a:"don't",h:"do notを縮めた形"},{p:"We ___ play tennis.",a:"don't",h:"一般動詞の否定"}]},
+  ]},
+  { lesson:"Lesson 4", steps:[
+    { num:10, title:"三単現①：He likes〜", sub:"He/Sheのとき動詞にsがつく",
+      formula:'<span style="color:var(--c-s)">He/She</span>＋<span style="color:var(--c-v)">動詞+s</span>＋〜',
+      examples:[
+        {en:[["I","s"],["like","v"],["cats","o"],[".","p"]], ja:"わたしはネコが好きです。"},
+        {en:[["He","s"],["likes","v"],["cats","o"],[".","p"]], ja:"彼はネコが好きです。（sがつく！）"},
+        {en:[["She","s"],["studies","v"],["English","o"],[".","p"]], ja:"彼女は英語を勉強します。（y→ies）"},
+      ],
+      notice:'<strong>✨ ルール：</strong>He/She/Itが主語のとき、動詞に<strong>s/es</strong>がつく。これが三単現のs！',
+      quizzes:[{p:"She ___ soccer.（like）",a:"likes",h:"He/SheはlikesにSをつける"},{p:"He ___ tennis.（play）",a:"plays",h:"He/Sheのときsをつける"}]},
+    { num:11, title:"三単現②：Does疑問文・否定", sub:"DoesはsをDoesに移す",
+      formula:'<span style="color:var(--c-q)">Does</span>＋<span style="color:var(--c-s)">He/She</span>＋<span style="color:var(--c-v)">動詞（原形）</span>',
+      compare:true,
+      examples:[
+        {left:[["He","s"],["likes","v"],["cats","o"],[".",""]], right:[["Does","q"],["he","s"],["like","v"],["cats","o"],["?",""]], ja:"彼はネコが好きですか？（動詞はs なし！）"},
+        {left:[["She","s"],["plays","v"],["tennis","o"],[".",""]], right:[["She","s"],["doesn't","n"],["play","v"],["tennis","o"],[".",""]], ja:"彼女はテニスをしません。"},
+      ],
+      notice:'<strong>✨ ポイント：</strong>Doesを使うとき、動詞は<strong>原形（sなし）</strong>に戻す！',
+      quizzes:[{p:"___ he like cats?",a:"Does",h:"He/Sheの疑問文"},{p:"She ___ play tennis.",a:"doesn't",h:"He/Sheの否定文"}]},
+    { num:12, title:"疑問詞①：Where/When", sub:"「どこ」「いつ」を聞く",
+      formula:'<span style="color:var(--c-q)">Where/When</span>＋do/does＋<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-v)">動詞</span>',
+      examples:[
+        {en:[["Where","q"],["do","v"],["you","s"],["live","v"],["?","p"]], ja:"あなたはどこに住んでいますか？"},
+        {en:[["When","q"],["do","v"],["you","s"],["study","v"],["?","p"]], ja:"あなたはいつ勉強しますか？"},
+      ],
+      notice:'<strong>✨ ポイント：</strong>疑問詞（Where/When）を<strong>最初</strong>に置いてから、Do疑問文の形を続ける！',
+      quizzes:[{p:"___ do you live?（どこ）",a:"Where",h:"「どこ」の疑問詞"},{p:"___ do you study?（いつ）",a:"When",h:"「いつ」の疑問詞"}]},
+  ]},
+  { lesson:"Lesson 5", steps:[
+    { num:13, title:"所有格：my/your/his/her", sub:"「〜の」を表す言葉",
+      formula:'<span style="color:var(--c-s)">my/your/his/her</span>＋<span style="color:var(--c-o)">名詞</span>',
+      examples:[
+        {en:[["This is","gray"],["my","s"],["bag","o"],[".","p"]], ja:"これはわたしのかばんです。"},
+        {en:[["I like","gray"],["his","s"],["music","o"],[".","p"]], ja:"わたしは彼の音楽が好きです。"},
+      ],
+      notice:'<strong>✨ セット：</strong>I→my、You→your、He→his、She→her。セットで覚えよう！',
+      quizzes:[{p:"This is ___ book.（わたしの）",a:"my",h:"Iの所有格"},{p:"I like ___ music.（彼女の）",a:"her",h:"Sheの所有格"}]},
+    { num:14, title:"疑問詞②：Whose/How many", sub:"「だれの」「いくつ」を聞く",
+      formula:'<span style="color:var(--c-q)">Whose/How many</span>＋〜<span style="color:var(--c-q)">?</span>',
+      examples:[
+        {en:[["Whose","q"],["bag","o"],["is this","gray"],["?","p"]], ja:"これはだれのかばんですか？"},
+        {en:[["How many","q"],["cats","o"],["do you have","gray"],["?","p"]], ja:"あなたはネコを何匹飼っていますか？"},
+      ],
+      notice:'<strong>✨ ポイント：</strong>Whoseは「だれの〜？」。答えは It\'s my bag. のように所有格で返す！',
+      quizzes:[{p:"___ bag is this?（だれの）",a:"Whose",h:"「だれの」の疑問詞"},{p:"___ ___ cats do you have?",a:"How many",h:"数を聞く疑問詞"}]},
+    { num:15, title:"所有代名詞：mine/yours/his/hers", sub:"「〜のもの」を表す言葉",
+      formula:'<span style="color:var(--c-s)">mine/yours/his/hers</span>（単独で使える）',
+      examples:[
+        {en:[["This bag is","gray"],["mine","s"],[".","p"]], ja:"このかばんはわたしのものです。"},
+        {en:[["That is","gray"],["yours","s"],[".","p"]], ja:"あれはあなたのものです。"},
+      ],
+      notice:'<strong>✨ 違い：</strong>my bag（my＋名詞）vs mine（単独）。It\'s mine. のように使える！',
+      quizzes:[{p:"This is ___. （わたしのもの）",a:"mine",h:"Iの所有代名詞"},{p:"That is ___. （あなたのもの）",a:"yours",h:"Youの所有代名詞"}]},
+  ]},
+  { lesson:"Lesson 6", steps:[
+    { num:16, title:"命令文：動詞の原形で始める", sub:"主語なしで動詞から始める",
+      formula:'<span style="color:var(--c-v)">動詞（原形）</span>＋〜 ／ Don\'t＋<span style="color:var(--c-v)">動詞</span>＋〜',
+      examples:[
+        {en:[["Open","v"],["your book","o"],[".","p"]], ja:"本を開けなさい。"},
+        {en:[["Don't","n"],["run","v"],["here","o"],[".","p"]], ja:"ここで走ってはいけません。"},
+        {en:[["Let's","q"],["play","v"],["soccer","o"],[".","p"]], ja:"サッカーをしよう！"},
+      ],
+      notice:'<strong>✨ ルール：</strong>命令文は主語（You）を省いて<strong>動詞の原形から始める</strong>！',
+      quizzes:[{p:"___ your book.（開けなさい）",a:"Open",h:"動詞の原形で始める"},{p:"___ run here.（走ってはいけない）",a:"Don't",h:"否定命令文"}]},
+    { num:17, title:"can①：「〜できる」", sub:"can＋動詞の原形",
+      formula:'<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-q)">can</span>＋<span style="color:var(--c-v)">動詞（原形）</span>',
+      examples:[
+        {en:[["I","s"],["can","q"],["swim","v"],[".","p"]], ja:"わたしは泳ぐことができます。"},
+        {en:[["She","s"],["can","q"],["play","v"],["the guitar","o"],[".","p"]], ja:"彼女はギターを弾くことができます。"},
+      ],
+      notice:'<strong>✨ ポイント：</strong>canの後は必ず<strong>動詞の原形</strong>（sなし）！',
+      quizzes:[{p:"I ___ swim.（できる）",a:"can",h:"「できる」の助動詞"},{p:"She can ___ the piano.",a:"play",h:"canの後は動詞の原形"}]},
+    { num:18, title:"can②：Can〜? / can't", sub:"疑問文・否定文",
+      formula:'<span style="color:var(--c-q)">Can</span>＋<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-v)">動詞</span>＋〜<span style="color:var(--c-q)">?</span>',
+      examples:[
+        {en:[["Can","q"],["you","s"],["swim","v"],["?","p"]], ja:"あなたは泳ぐことができますか？"},
+        {en:[["Yes,","p"],["I","s"],["can","q"],[".","p"]], ja:"はい、できます。"},
+        {en:[["I","s"],["can't","n"],["swim","v"],[".","p"]], ja:"わたしは泳ぐことができません。"},
+      ],
+      notice:'<strong>✨ セット：</strong>Can〜?→Yes, I can. / No, I can\'t. で答える！',
+      quizzes:[{p:"___ you swim?（できる？）",a:"Can",h:"canを文頭に"},{p:"I ___ swim.（できない）",a:"can't",h:"cannotを縮めた形"}]},
+  ]},
+  { lesson:"Lesson 7-8", steps:[
+    { num:19, title:"現在進行形①：〜しています", sub:"am/is/are＋動詞ing",
+      formula:'<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-v)">am/is/are</span>＋<span style="color:var(--c-v)">動詞ing</span>',
+      examples:[
+        {en:[["I","s"],["am","v"],["running","v"],[".","p"]], ja:"わたしは走っています。"},
+        {en:[["She","s"],["is","v"],["studying","v"],["English","o"],[".","p"]], ja:"彼女は英語を勉強しています。"},
+      ],
+      notice:'<strong>✨ ポイント：</strong>今まさにやっていることを表す。be動詞＋<strong>動詞ing</strong>がセット！',
+      quizzes:[{p:"I am ___.（走っている）",a:"running",h:"run+ingの変化に注意"},{p:"She is ___ English.",a:"studying",h:"study+ing"}]},
+    { num:20, title:"現在進行形②：疑問文・否定文", sub:"be動詞を動かすだけ",
+      formula:'<span style="color:var(--c-v)">Is/Are</span>＋<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-v)">動詞ing</span>＋〜<span style="color:var(--c-q)">?</span>',
+      examples:[
+        {en:[["Is","v"],["she","s"],["studying","v"],["?","p"]], ja:"彼女は勉強していますか？"},
+        {en:[["I","s"],["am","v"],["not","n"],["running","v"],[".","p"]], ja:"わたしは走っていません。"},
+      ],
+      notice:'<strong>✨ ポイント：</strong>進行形はbe動詞で操作。一般動詞のDo/Doesは使わない！',
+      quizzes:[{p:"___ she studying?",a:"Is",h:"be動詞を先頭に"},{p:"I am ___ running.（していない）",a:"not",h:"be動詞の後ろにnotを置く"}]},
+  ]},
+  { lesson:"Lesson 9", steps:[
+    { num:21, title:"過去形①：規則動詞（ed）", sub:"動詞の語尾にedをつける",
+      formula:'<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-v)">動詞+ed</span>＋〜',
+      examples:[
+        {en:[["I","s"],["played","v"],["soccer","o"],["yesterday","gray"],[".","p"]], ja:"わたしは昨日サッカーをしました。"},
+        {en:[["She","s"],["studied","v"],["English","o"],[".","p"]], ja:"彼女は英語を勉強しました。"},
+      ],
+      notice:'<strong>✨ ルール：</strong>過去のことはedをつける。study→studied（y→ied）のような変化に注意！',
+      quizzes:[{p:"I ___ soccer yesterday.（playの過去）",a:"played",h:"play＋ed"},{p:"She ___ English.（studyの過去）",a:"studied",h:"y→iedに変化"}]},
+    { num:22, title:"過去形②：不規則動詞", sub:"形が変わる動詞を覚えよう",
+      formula:'<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-v)">不規則変化した動詞</span>＋〜',
+      examples:[
+        {en:[["I","s"],["went","v"],["to school","o"],[".","p"]], ja:"わたしは学校に行きました。（go→went）"},
+        {en:[["She","s"],["had","v"],["lunch","o"],[".","p"]], ja:"彼女は昼食を食べました。（have→had）"},
+        {en:[["I","s"],["saw","v"],["a movie","o"],[".","p"]], ja:"わたしは映画を見ました。（see→saw）"},
+      ],
+      notice:'<strong>✨ 代表的な不規則動詞：</strong>go→went / have→had / come→came / see→saw / eat→ate',
+      quizzes:[{p:"I ___ to school.（goの過去）",a:"went",h:"goの不規則過去形"},{p:"She ___ a movie.（seeの過去）",a:"saw",h:"seeの不規則過去形"}]},
+    { num:23, title:"過去形③：Did疑問文・否定", sub:"Didを使う",
+      formula:'<span style="color:var(--c-q)">Did</span>＋<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-v)">動詞（原形）</span>',
+      compare:true,
+      examples:[
+        {left:[["I","s"],["played","v"],["soccer","o"],[".",""]], right:[["Did","q"],["you","s"],["play","v"],["soccer","o"],["?",""]], ja:"あなたはサッカーをしましたか？"},
+        {left:[["She","s"],["went","v"],["to school","o"],[".",""]], right:[["She","s"],["didn't","n"],["go","v"],["to school","o"],[".",""]], ja:"彼女は学校に行きませんでした。"},
+      ],
+      notice:'<strong>✨ ポイント：</strong>Didを使うとき、動詞は<strong>原形に戻す</strong>！Did you <strong>went</strong>× → Did you <strong>go</strong>○',
+      quizzes:[{p:"___ you play soccer?",a:"Did",h:"過去の疑問文"},{p:"She ___ go to school.",a:"didn't",h:"did notを縮めた形"}]},
+  ]},
+  { lesson:"Lesson 10", steps:[
+    { num:24, title:"be going to：するつもり", sub:"未来の予定を表す",
+      formula:'<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-v)">am/is/are</span>＋<span style="color:var(--c-q)">going to</span>＋<span style="color:var(--c-v)">動詞（原形）</span>',
+      examples:[
+        {en:[["I","s"],["am","v"],["going to","q"],["play","v"],["soccer","o"],[".","p"]], ja:"わたしはサッカーをするつもりです。"},
+        {en:[["She","s"],["is","v"],["going to","q"],["study","v"],["English","o"],[".","p"]], ja:"彼女は英語を勉強するつもりです。"},
+      ],
+      notice:'<strong>✨ ポイント：</strong>be going toはセットで覚える。be動詞は主語によってam/is/areに変わる！',
+      quizzes:[{p:"I am ___ ___ play soccer.",a:"going to",h:"未来の予定を表す"},{p:"She ___ going to study.",a:"is",h:"Sheのbe動詞"}]},
+    { num:25, title:"will：〜するでしょう", sub:"その場で決めた未来",
+      formula:'<span style="color:var(--c-s)">主語</span>＋<span style="color:var(--c-q)">will</span>＋<span style="color:var(--c-v)">動詞（原形）</span>',
+      examples:[
+        {en:[["I","s"],["will","q"],["help","v"],["you","o"],[".","p"]], ja:"わたしはあなたを助けます。（今決めた）"},
+        {en:[["It","s"],["will","q"],["rain","v"],["tomorrow","gray"],[".","p"]], ja:"明日は雨が降るでしょう。"},
+      ],
+      notice:'<strong>✨ be going to vs will：</strong>be going toは「前から決めていた予定」、willは「今決めた/〜でしょう」！',
+      quizzes:[{p:"I ___ help you.",a:"will",h:"今決めた未来"},{p:"___ you help me?（willの疑問文）",a:"Will",h:"willを先頭に"}]},
+  ]},
+  { lesson:"Lesson 11", steps:[
+    { num:26, title:"There is/are：〜がある", sub:"存在を表す便利な表現",
+      formula:'<span style="color:var(--c-q)">There</span>＋<span style="color:var(--c-v)">is/are</span>＋<span style="color:var(--c-o)">〜</span>',
+      examples:[
+        {en:[["There is","q"],["a cat","o"],["on the sofa","gray"],[".","p"]], ja:"ソファの上にネコがいます。"},
+        {en:[["There are","q"],["two books","o"],["on the desk","gray"],[".","p"]], ja:"机の上に本が2冊あります。"},
+      ],
+      notice:'<strong>✨ 使い分け：</strong>1つ→There <strong>is</strong>（単数）、2つ以上→There <strong>are</strong>（複数）！',
+      quizzes:[{p:"There ___ a cat on the sofa.",a:"is",h:"単数のときはis"},{p:"There ___ two books on the desk.",a:"are",h:"複数のときはare"}]},
+    { num:27, title:"some/any/many：量の表現", sub:"肯定・疑問・否定で使い分け",
+      formula:'<span style="color:var(--c-o)">some</span>（肯定）／<span style="color:var(--c-q)">any</span>（疑問・否定）／<span style="color:var(--c-n)">many</span>（たくさん）',
+      examples:[
+        {en:[["I have","gray"],["some","o"],["cats","o"],[".","p"]], ja:"わたしはネコを何匹か飼っています。（肯定）"},
+        {en:[["Do you have","gray"],["any","q"],["cats","o"],["?","p"]], ja:"あなたはネコを飼っていますか？（疑問）"},
+        {en:[["I don't have","gray"],["any","n"],["cats","o"],[".","p"]], ja:"わたしはネコを1匹も飼っていません。（否定）"},
+      ],
+      notice:'<strong>✨ 使い分け：</strong>someは肯定文で、anyは疑問文・否定文で使う！',
+      quizzes:[{p:"I have ___ cats.（肯定文）",a:"some",h:"肯定文ではsome"},{p:"Do you have ___ cats?（疑問文）",a:"any",h:"疑問文ではany"}]},
+  ]},
+  { lesson:"Lesson 12", steps:[
+    { num:28, title:"比較①：比較級（〜よりも）", sub:"形容詞にerをつける",
+      formula:'<span style="color:var(--c-s)">A</span>＋is＋<span style="color:var(--c-o)">形容詞+er</span>＋than＋<span style="color:var(--c-s)">B</span>',
+      examples:[
+        {en:[["Ken","s"],["is","v"],["taller","o"],["than","gray"],["Yuki","s"],[".","p"]], ja:"ケンはユキより背が高いです。"},
+        {en:[["English","s"],["is","v"],["more interesting","o"],["than","gray"],["math","s"],[".","p"]], ja:"英語は数学よりおもしろいです。（長い形容詞はmoreを前に）"},
+      ],
+      notice:'<strong>✨ ルール：</strong>短い形容詞→er / 長い形容詞→more〜。比べるときは than を使う！',
+      quizzes:[{p:"Ken is ___ than Yuki.（tall→比較級）",a:"taller",h:"tall＋er"},{p:"This is ___ ___ that.（interestingの比較）",a:"more interesting",h:"長い形容詞はmoreを前に"}]},
+    { num:29, title:"比較②：最上級（一番〜）", sub:"the＋形容詞estをつける",
+      formula:'<span style="color:var(--c-s)">A</span>＋is＋<span style="color:var(--c-q)">the</span>＋<span style="color:var(--c-o)">形容詞+est</span>＋in/of〜',
+      examples:[
+        {en:[["Ken","s"],["is","v"],["the tallest","o"],["in his class","gray"],[".","p"]], ja:"ケンはクラスで一番背が高いです。"},
+        {en:[["This","s"],["is","v"],["the most beautiful","o"],["park in Japan","gray"],[".","p"]], ja:"これは日本で一番美しい公園です。"},
+      ],
+      notice:'<strong>✨ セット：</strong>最上級の前には必ず <strong>the</strong>。「〜の中で」はin（場所）またはof（複数）を使う！',
+      quizzes:[{p:"Ken is the ___ in his class.（tall→最上級）",a:"tallest",h:"tall＋est"},{p:"This is the ___ ___ park.（beautiful→最上級）",a:"most beautiful",h:"長い形容詞はmostを前に"}]},
+    { num:30, title:"比較③：as〜as / 疑問詞比較", sub:"「同じくらい」「どちらが」",
+      formula:'<span style="color:var(--c-s)">A</span>＋is＋<span style="color:var(--c-q)">as</span>＋<span style="color:var(--c-o)">形容詞</span>＋<span style="color:var(--c-q)">as</span>＋<span style="color:var(--c-s)">B</span>',
+      examples:[
+        {en:[["Ken","s"],["is","v"],["as tall as","q"],["Yuki","s"],[".","p"]], ja:"ケンはユキと同じくらいの身長です。"},
+        {en:[["Who","q"],["is","v"],["taller","o"],["?","p"]], ja:"どちらが背が高いですか？"},
+      ],
+      notice:'<strong>✨ 総まとめ：</strong>原級（as〜as）・比較級（〜er/more〜）・最上級（the〜est/most〜）の3パターン！',
+      quizzes:[{p:"Ken is as ___ as Yuki.（tall）",a:"tall",h:"as〜asの間は原級（変化なし）"},{p:"___ is taller?（どちらが）",a:"Who",h:"人について聞くとき"}]},
+  ]},
+];
+
+const flashwords = [
+  {en:"like",hint:"動詞",ja:"〜が好きだ",ex:"I like soccer.\nわたしはサッカーが好きです。"},
+  {en:"play",hint:"動詞",ja:"する・弾く",ex:"I play tennis.\nわたしはテニスをします。"},
+  {en:"study",hint:"動詞",ja:"勉強する",ex:"I study English.\nわたしは英語を勉強します。"},
+  {en:"have",hint:"動詞",ja:"持っている・飼っている",ex:"I have a dog.\nわたしは犬を飼っています。"},
+  {en:"eat",hint:"動詞",ja:"食べる",ex:"I eat lunch.\nわたしは昼食を食べます。"},
+  {en:"run",hint:"動詞",ja:"走る",ex:"I run every day.\nわたしは毎日走ります。"},
+  {en:"swim",hint:"動詞",ja:"泳ぐ",ex:"I can swim fast.\nわたしは速く泳ぐことができます。"},
+  {en:"speak",hint:"動詞",ja:"話す",ex:"He can speak English.\n彼は英語を話すことができます。"},
+  {en:"see",hint:"動詞",ja:"見る・会う",ex:"I saw a movie.\nわたしは映画を見ました。"},
+  {en:"go",hint:"動詞",ja:"行く",ex:"I went to school.\nわたしは学校に行きました。"},
+  {en:"come",hint:"動詞",ja:"来る",ex:"He came here.\n彼はここに来ました。"},
+  {en:"make",hint:"動詞",ja:"作る",ex:"She made a cake.\n彼女はケーキを作りました。"},
+  {en:"friend",hint:"名詞",ja:"友達",ex:"She is my friend.\n彼女はわたしの友達です。"},
+  {en:"school",hint:"名詞",ja:"学校",ex:"I go to school.\nわたしは学校に行きます。"},
+  {en:"book",hint:"名詞",ja:"本",ex:"This is my book.\nこれはわたしの本です。"},
+  {en:"music",hint:"名詞",ja:"音楽",ex:"I like music.\nわたしは音楽が好きです。"},
+  {en:"lunch",hint:"名詞",ja:"昼食",ex:"I eat lunch at noon.\nわたしは正午に昼食を食べます。"},
+  {en:"park",hint:"名詞",ja:"公園",ex:"There is a park near here.\n近くに公園があります。"},
+  {en:"dog",hint:"名詞",ja:"犬",ex:"I have a dog.\nわたしは犬を飼っています。"},
+  {en:"cat",hint:"名詞",ja:"ネコ",ex:"Do you like cats?\nあなたはネコが好きですか？"},
+  {en:"tall",hint:"形容詞",ja:"背が高い",ex:"Ken is taller than Yuki.\nケンはユキより背が高いです。"},
+  {en:"fast",hint:"形容詞/副詞",ja:"速い・速く",ex:"She runs fast.\n彼女は速く走ります。"},
+  {en:"beautiful",hint:"形容詞",ja:"美しい",ex:"This is the most beautiful park.\nこれは一番美しい公園です。"},
+  {en:"interesting",hint:"形容詞",ja:"おもしろい",ex:"English is more interesting than math.\n英語は数学よりおもしろいです。"},
+  {en:"yesterday",hint:"副詞",ja:"昨日",ex:"I played soccer yesterday.\nわたしは昨日サッカーをしました。"},
+  {en:"tomorrow",hint:"副詞",ja:"明日",ex:"It will rain tomorrow.\n明日は雨が降るでしょう。"},
+  {en:"always",hint:"副詞",ja:"いつも",ex:"I always study English.\nわたしはいつも英語を勉強します。"},
+  {en:"can",hint:"助動詞",ja:"〜できる",ex:"I can swim.\nわたしは泳ぐことができます。"},
+  {en:"will",hint:"助動詞",ja:"〜するでしょう",ex:"I will help you.\nわたしはあなたを助けます。"},
+  {en:"some",hint:"形容詞",ja:"いくらかの",ex:"I have some cats.\nわたしはネコを何匹か飼っています。"},
+];
+
+const dailySentences = [
+  {en:"I am Ken.",ja:"わたしはケンです。",pattern:"be動詞：I am 〜",tip:"「I（わたし）」のときだけ am を使います。今日はこの文を10回声に出して読んでみよう！"},
+  {en:"She is my friend.",ja:"彼女はわたしの友達です。",pattern:"be動詞：He/She is 〜",tip:"She/He/Thisのときは is を使います。You are とは違うので注意！"},
+  {en:"Are you Ken?",ja:"あなたはケンですか？",pattern:"be動詞 疑問文",tip:"be動詞（are）を文の先頭に移動させるだけ！他の単語は動かさない。"},
+  {en:"I am not a student.",ja:"わたしは生徒ではありません。",pattern:"be動詞 否定文",tip:"be動詞のすぐ後ろに not を置く。am not を縮めることはできないよ！"},
+  {en:"I like soccer.",ja:"わたしはサッカーが好きです。",pattern:"一般動詞：like",tip:"like は「好き」を表す一般動詞。be動詞（am/is/are）とは別のグループだよ！"},
+  {en:"Do you play tennis?",ja:"あなたはテニスをしますか？",pattern:"一般動詞 疑問文（Do〜）",tip:"一般動詞の疑問文はDoを先頭に置く。be動詞の疑問文とやり方が違うよ！"},
+  {en:"I don't like math.",ja:"わたしは数学が好きではありません。",pattern:"一般動詞 否定文（don't）",tip:"do not を縮めて don't。動詞の前に置くだけで否定文になる！"},
+  {en:"She likes cats.",ja:"彼女はネコが好きです。",pattern:"三単現のs",tip:"He/She/Itが主語のとき、動詞にsをつける。これが「三単現のs」！"},
+  {en:"Does he play soccer?",ja:"彼はサッカーをしますか？",pattern:"三単現 疑問文（Does〜）",tip:"DoesはDoにsがついた形。Doesを使うとき動詞はsなしの原形に戻す！"},
+  {en:"I can swim.",ja:"わたしは泳ぐことができます。",pattern:"助動詞 can",tip:"canの後は必ず動詞の原形。He can speaks× → He can speak○"},
+  {en:"I am running.",ja:"わたしは走っています。",pattern:"現在進行形",tip:"今まさにやっていることを表す。be動詞＋動詞ingのセット！"},
+  {en:"I went to school.",ja:"わたしは学校に行きました。",pattern:"過去形：不規則動詞",tip:"go→wentのように形が変わる動詞がある。went/had/came/saw/ate/madeを覚えよう！"},
+  {en:"Did you play soccer?",ja:"あなたはサッカーをしましたか？",pattern:"過去形 疑問文（Did〜）",tip:"Didを使うとき、動詞は原形に戻す。Did you went× → Did you go○"},
+  {en:"I am going to play soccer.",ja:"わたしはサッカーをするつもりです。",pattern:"be going to",tip:"be going toは「前から決めていた予定」を表す！"},
+  {en:"There is a cat on the sofa.",ja:"ソファの上にネコがいます。",pattern:"There is 〜",tip:"1つならThere is、2つ以上ならThere areを使う！"},
+  {en:"Ken is taller than Yuki.",ja:"ケンはユキより背が高いです。",pattern:"比較級",tip:"短い形容詞はer、長い形容詞はmore〜。比べるときはthanを使う！"},
+];
+
+// ===== STATE =====
+// Safe storage wrapper for Safari file:// mode
+const store = {
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+};
+let doneSteps = new Set(JSON.parse(store.get('doneSteps')||'[]'));
+let weakQuizzes = JSON.parse(store.get('weakQuizzes')||'[]');
+let streak = parseInt(store.get('streak')||'0');
+let lastDate = store.get('lastDate')||'';
+let fcIndex = 0, fcDone = 0, fcOk = 0, fcFlipped = false;
+let dailyIndex = parseInt(store.get('dailyIndex')||'0');
+
+function saveState() {
+  store.set('doneSteps', JSON.stringify([...doneSteps]));
+  store.set('weakQuizzes', JSON.stringify(weakQuizzes));
+}
+
+// ===== STREAK =====
+function updateStreak() {
+  const today = new Date().toDateString();
+  if (lastDate !== today) {
+    const yesterday = new Date(Date.now()-86400000).toDateString();
+    if (lastDate === yesterday) streak++;
+    else if (lastDate !== today) streak = 1;
+    store.set('streak', streak);
+    store.set('lastDate', today);
+  }
+  document.getElementById('streak-display').textContent = `🔥 ${streak}日連続`;
+}
+updateStreak();
+
+// ===== TABS =====
+function switchPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  event.target.classList.add('active');
+  if (id==='review') renderReview();
+  if (id==='home') updateHomeRing();
+}
+
+// ===== HOME RING =====
+function updateHomeRing() {
+  const n = doneSteps.size;
+  document.getElementById('ring-num').textContent = n;
+  const r=40, circ=2*Math.PI*r;
+  const offset = circ - (n/30)*circ;
+  document.getElementById('ring-fill').style.strokeDashoffset = offset;
+}
+updateHomeRing();
+
+// ===== DAILY =====
+function showDaily(i) {
+  const d = dailySentences[i % dailySentences.length];
+  document.getElementById('daily-en').textContent = d.en;
+  document.getElementById('daily-ja').textContent = d.ja;
+  document.getElementById('daily-pattern').textContent = '📌 ' + d.pattern;
+  document.getElementById('daily-tip-body').textContent = d.tip;
+}
+function nextDaily() {
+  dailyIndex = (dailyIndex + 1) % dailySentences.length;
+  store.set('dailyIndex', dailyIndex);
+  showDaily(dailyIndex);
+}
+showDaily(dailyIndex);
+
+// ===== SPEECH =====
+function speakText(text) {
+  if (!window.speechSynthesis) return;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US'; u.rate = 0.85;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(u);
+}
+
+// ===== STEPS =====
+const sidebar = document.getElementById('steps-sidebar');
+const content = document.getElementById('steps-content');
+
+lessons.forEach(lesson => {
+  const hd = document.createElement('div');
+  hd.className = 'sidebar-lesson-hd';
+  hd.textContent = lesson.lesson;
+  sidebar.appendChild(hd);
+
+  lesson.steps.forEach(step => {
+    // sidebar btn
+    const btn = document.createElement('button');
+    btn.className = 'sbtn' + (doneSteps.has(step.num)?'  done':'');
+    btn.id = 'sbtn-'+step.num;
+    btn.onclick = () => showStep(step.num);
+    btn.innerHTML = `<span class="sbtn-num">${step.num}</span><span class="sbtn-label">${step.title}</span>`;
+    sidebar.appendChild(btn);
+
+    // panel
+    const panel = document.createElement('div');
+    panel.className = 'step-panel';
+    panel.id = 'spanel-'+step.num;
+
+    // examples
+    let exHTML = '';
+    if (step.compare) {
+      exHTML += `<div class="ex-label">▶ 変化のパターンを観察しよう</div>`;
+      step.examples.forEach(ex => {
+        const L = ex.left.map(([w,t])=>t?`<span class="w w-${t}">${w}</span>`:`<span class="w-p">${w}</span>`).join('');
+        const R = ex.right.map(([w,t])=>t?`<span class="w w-${t}">${w}</span>`:`<span class="w-p">${w}</span>`).join('');
+        exHTML += `<div class="cmp-row">${L}<span class="arrow">→</span>${R}</div><div class="sent-ja">${ex.ja}</div>`;
+      });
+    } else {
+      exHTML += `<div class="ex-label">▶ 同じパターンを並べて見てみよう</div>`;
+      step.examples.forEach(ex => {
+        const spans = ex.en.map(([w,t])=>{
+          if(t==='gray') return `<span class="w w-gray">${w}</span>`;
+          if(t&&t!=='p') return `<span class="w w-${t}">${w}</span>`;
+          return `<span class="w-p">${w}</span>`;
+        }).join('');
+        exHTML += `<div class="sent-row">${spans}</div><div class="sent-ja">${ex.ja}</div>`;
+      });
+    }
+
+    // quiz
+    let qHTML = '';
+    step.quizzes.forEach((q,qi)=>{
+      const id = `qi_${step.num}_${qi}`;
+      qHTML += `<div class="quiz-card" data-answer="${q.a}">
+        <div class="quiz-num">Q${qi+1}</div>
+        <div class="quiz-prompt">${q.p.replace('___','<span class="blank-line"></span>')}</div>
+        <input class="qi" id="${id}" placeholder="英語を入力…" onkeydown="if(event.key==='Enter')checkQI('${id}',${step.num})">
+        <div class="quiz-hint">${q.h}</div>
+        <div class="quiz-ans-row" id="qans-${id}">✅ 正解：${q.a}</div>
+      </div>`;
+    });
+
+    const prev = step.num > 1 ? step.num-1 : null;
+    const next = step.num < 30 ? step.num+1 : null;
+
+    // First example sentence for speak
+    const speakSample = step.examples[0].en.map(([w])=>w).filter(w=>!['.',',','?','!',''].includes(w)).join(' ');
+
+    panel.innerHTML = `
+      <div class="sp-lesson-tag">${lesson.lesson} ｜ No.${step.num}</div>
+      <div class="sp-title">${step.title}</div>
+      <div class="sp-sub">${step.sub}</div>
+      <div class="legend">
+        <span class="legend-item"><span class="ldot" style="background:#2563EB"></span>主語</span>
+        <span class="legend-item"><span class="ldot" style="background:#EF4444"></span>動詞</span>
+        <span class="legend-item"><span class="ldot" style="background:#10B981"></span>目的語</span>
+        <span class="legend-item"><span class="ldot" style="background:#8B5CF6"></span>疑問語</span>
+        <span class="legend-item"><span class="ldot" style="background:#F59E0B"></span>not/否定</span>
+      </div>
+      <div class="formula">${step.formula}</div>
+      ${exHTML}
+      <button class="speak-btn" onclick="speakText('${speakSample}')">🔊 例文を聞く</button>
+      <div class="notice">${step.notice}</div>
+      <div class="quiz-wrap">
+        <div class="quiz-hd">✏️ 確認クイズ</div>
+        ${qHTML}
+        <div class="btn-row">
+          <button class="btn btn-green" onclick="checkAllStep(${step.num})">採点する</button>
+          <button class="btn btn-ghost" onclick="showStepAns(${step.num})">答えを見る</button>
+          ${next ? `<button class="btn btn-blue" onclick="showStep(${next})">次へ → No.${next}</button>` : '<span style="font-size:0.8rem;color:var(--grass);font-weight:700;padding:8px 0">🎉 全30ステップ完了！</span>'}
+        </div>
+        <div class="score-badge" id="sbadge-${step.num}"></div>
+      </div>
+      <div class="step-nav">
+        ${prev ? `<button class="btn btn-ghost" onclick="showStep(${prev})">← No.${prev}</button>` : '<span></span>'}
+        ${next ? `<button class="btn btn-ghost" onclick="showStep(${next})">No.${next} →</button>` : ''}
+      </div>`;
+    content.appendChild(panel);
+  });
+});
+
+function showStep(num) {
+  document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('spanel-'+num).classList.add('active');
+  const btn = document.getElementById('sbtn-'+num);
+  if(btn) btn.classList.add('active');
+  document.getElementById('steps-content').scrollTop = 0;
+}
+showStep(1);
+
+function checkQI(id, stepNum) {
+  const input = document.getElementById(id);
+  const card = input.closest('.quiz-card');
+  const ans = card.dataset.answer.toLowerCase().trim();
+  const val = input.value.toLowerCase().trim();
+  input.classList.remove('ok','ng');
+  if (val === ans) {
+    input.classList.add('ok');
+  } else if (val) {
+    input.classList.add('ng');
+    // add to weak
+    const q = card.querySelector('.quiz-prompt').textContent;
+    if (!weakQuizzes.find(w=>w.q===q)) {
+      weakQuizzes.push({q, a:ans, stepNum});
+      saveState();
+    }
+  }
+}
+
+function checkAllStep(stepNum) {
+  const panel = document.getElementById('spanel-'+stepNum);
+  const inputs = panel.querySelectorAll('.qi');
+  let correct=0;
+  inputs.forEach(inp=>{
+    const card = inp.closest('.quiz-card');
+    const ans = card.dataset.answer.toLowerCase().trim();
+    const val = inp.value.toLowerCase().trim();
+    inp.classList.remove('ok','ng');
+    if(val===ans){inp.classList.add('ok');correct++;}
+    else{
+      inp.classList.add('ng');
+      const q=card.querySelector('.quiz-prompt').textContent;
+      if(!weakQuizzes.find(w=>w.q===q)){weakQuizzes.push({q,a:ans,stepNum});saveState();}
+    }
+  });
+  const badge=document.getElementById('sbadge-'+stepNum);
+  badge.classList.add('show');
+  const total=inputs.length;
+  badge.textContent=`${correct===total?'🎉':correct>0?'😊':'💪'} ${correct}/${total}問正解！`;
+  if(correct===total){
+    doneSteps.add(stepNum);
+    saveState();
+    const btn=document.getElementById('sbtn-'+stepNum);
+    if(btn){btn.classList.add('done');}
+    updateHomeRing();
+  }
+}
+
+function showStepAns(stepNum){
+  const panel=document.getElementById('spanel-'+stepNum);
+  panel.querySelectorAll('.quiz-ans-row').forEach(a=>a.classList.add('show'));
+}
+
+// ===== FLASHCARD =====
+function renderFC() {
+  const w = flashwords[fcIndex];
+  document.getElementById('fc-en').textContent = w.en;
+  document.getElementById('fc-hint').textContent = w.hint;
+  document.getElementById('fc-ja').textContent = w.ja;
+  document.getElementById('fc-ex').innerHTML = w.ex.replace('\n','<br>');
+  document.getElementById('fc-count').textContent = `${fcIndex+1} / ${flashwords.length}`;
+  document.getElementById('fc-prog').style.width = (fcDone/flashwords.length*100)+'%';
+  document.getElementById('fc-prog-label').textContent = `${fcDone} / ${flashwords.length} 完了`;
+  const card=document.getElementById('fc-card');
+  card.classList.remove('flipped');
+  fcFlipped=false;
+  document.getElementById('fc-result').classList.remove('show');
+}
+
+function flipCard(){
+  const card=document.getElementById('fc-card');
+  card.classList.toggle('flipped');
+  fcFlipped=!fcFlipped;
+  if(fcFlipped) speakText(flashwords[fcIndex].en);
+}
+
+function fcAnswer(ok){
+  fcDone++;
+  if(ok===true) fcOk++;
+  fcIndex++;
+  if(fcIndex>=flashwords.length){
+    const res=document.getElementById('fc-result');
+    res.classList.add('show');
+    document.getElementById('fc-card').style.display='none';
+    document.getElementById('fc-result-emoji').textContent=fcOk>=25?'🎉':fcOk>=15?'😊':'💪';
+    document.getElementById('fc-result-title').textContent=fcOk>=25?'すごい！完璧です！':'お疲れさま！';
+    document.getElementById('fc-result-sub').textContent=`${fcOk} / ${flashwords.length} 語覚えた！`;
+    return;
+  }
+  renderFC();
+}
+
+function resetFC(){
+  fcIndex=0;fcDone=0;fcOk=0;
+  document.getElementById('fc-card').style.display='';
+  document.getElementById('fc-result').classList.remove('show');
+  renderFC();
+}
+renderFC();
+
+// ===== REVIEW =====
+function renderReview(){
+  const el=document.getElementById('review-content');
+  if(weakQuizzes.length===0){
+    el.innerHTML=`<div class="review-empty"><div class="review-empty-icon">🎉</div><div>苦手問題はまだありません！<br>30ステップのクイズに挑戦しよう。</div></div>`;
+    return;
+  }
+  let html=`<div style="font-size:0.8rem;color:var(--muted);margin-bottom:12px;font-weight:700;">間違えた問題：${weakQuizzes.length}問</div>`;
+  weakQuizzes.forEach((w,i)=>{
+    html+=`<div class="review-card">
+      <div class="review-q">${w.q.replace('___','<span class="blank-line"></span>')}</div>
+      <input class="review-input" id="ri-${i}" placeholder="答えを入力…" data-answer="${w.a}" onkeydown="if(event.key==='Enter')checkRI(${i})">
+      <div class="review-a" id="ra-${i}" style="display:none">正解：<strong>${w.a}</strong></div>
+      <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">
+        <button class="btn btn-green" onclick="checkRI(${i})" style="padding:6px 14px;font-size:0.72rem">確認</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('ra-${i}').style.display='block'" style="padding:6px 14px;font-size:0.72rem">答えを見る</button>
+        <button class="btn btn-ghost" onclick="removeWeak(${i})" style="padding:6px 14px;font-size:0.72rem;color:var(--coral)">解決済み ✓</button>
+      </div>
+    </div>`;
+  });
+  el.innerHTML=html;
+}
+
+function checkRI(i){
+  const inp=document.getElementById('ri-'+i);
+  const ans=inp.dataset.answer.toLowerCase().trim();
+  const val=inp.value.toLowerCase().trim();
+  inp.classList.remove('ok','ng');
+  if(val===ans){inp.classList.add('ok');}
+  else inp.classList.add('ng');
+}
+
+function removeWeak(i){
+  weakQuizzes.splice(i,1);
+  saveState();
+  renderReview();
+}
+</script>
+</body>
+</html>
