@@ -2,7 +2,9 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>英語たんけん隊｜NEW TREASURE Stage1</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Noto+Sans+JP:wght@400;500;700&display=swap');
@@ -37,7 +39,10 @@ body {
   color: var(--ink);
   display: flex; flex-direction: column;
   min-height: 100vh;
+  min-height: -webkit-fill-available;
+  padding-bottom: env(safe-area-inset-bottom);
 }
+html { height: -webkit-fill-available; }
 
 /* ===== HEADER ===== */
 .app-header {
@@ -72,22 +77,26 @@ body {
 .nav-tabs::-webkit-scrollbar { display: none; }
 .nav-tab {
   flex: 0 0 auto;
-  padding: 9px 14px 8px;
+  padding: 10px 16px 9px;
   border: none; background: transparent;
   color: rgba(255,255,255,0.6);
   font-family: 'Noto Sans JP', sans-serif;
-  font-size: 0.75rem; font-weight: 700;
+  font-size: 0.78rem; font-weight: 700;
   cursor: pointer; white-space: nowrap;
   border-bottom: 3px solid transparent;
   transition: all 0.18s;
   display: flex; align-items: center; gap: 5px;
+  min-height: 44px; -webkit-tap-highlight-color: transparent;
 }
 .nav-tab.active { color: white; border-bottom-color: var(--sun); }
 
 /* ===== MAIN ===== */
-.main { flex: 1; overflow: hidden; display: flex; }
-.page { display: none; flex: 1; overflow-y: auto; }
-.page.active { display: block; }
+.main { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.page { display: none; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.page.active { display: flex; flex-direction: column; }
+#page-home.active, #page-daily.active, #page-flash.active,
+#page-wordquiz.active, #page-review.active, #page-phonics.active { display: block; }
+#page-steps.active { display: flex; flex-direction: column; }
 
 /* ===== HOME PAGE ===== */
 .home-hero {
@@ -152,9 +161,10 @@ body {
 }
 .daily-actions { display: flex; gap: 10px; justify-content: center; margin-top: 14px; }
 .daily-btn {
-  padding: 9px 18px; border: none; border-radius: 100px;
-  font-family: 'Noto Sans JP', sans-serif; font-size: 0.78rem; font-weight: 700;
-  cursor: pointer; transition: opacity 0.15s;
+  padding: 12px 22px; border: none; border-radius: 100px;
+  font-family: 'Noto Sans JP', sans-serif; font-size: 0.82rem; font-weight: 700;
+  cursor: pointer; transition: opacity 0.15s; min-height: 48px;
+  -webkit-tap-highlight-color: transparent;
 }
 .daily-btn:active { opacity: 0.8; }
 .daily-btn-speak { background: var(--sun); color: white; }
@@ -168,12 +178,37 @@ body {
 .daily-tip-title { font-weight: 700; color: var(--ocean); margin-bottom: 6px; font-size: 0.82rem; }
 
 /* ===== STEPS PAGE ===== */
-.steps-sidebar-wrap { display: flex; height: 100%; }
+.steps-sidebar-wrap { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+
+/* Mobile step selector bar */
+.step-selector-bar {
+  background: white; border-bottom: 1px solid var(--border);
+  padding: 10px 12px 8px; flex: 0 0 auto;
+}
+.step-selector-label {
+  font-size: 0.68rem; font-weight: 700; color: var(--muted);
+  margin-bottom: 7px; letter-spacing: 0.5px;
+}
+.step-selector-grid {
+  display: flex; overflow-x: auto; gap: 5px;
+  padding-bottom: 4px; scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.step-selector-grid::-webkit-scrollbar { display: none; }
+.step-pill {
+  flex: 0 0 auto;
+  min-width: 36px; min-height: 36px;
+  padding: 4px 8px; border-radius: 10px; border: 1.5px solid var(--border);
+  font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 800;
+  background: white; color: var(--muted); cursor: pointer;
+  transition: all 0.15s; display: flex; align-items: center; justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.step-pill.active { background: var(--ocean); color: white; border-color: var(--ocean); }
+.step-pill.done { background: var(--grass); color: white; border-color: var(--grass); }
+
 .steps-sidebar {
-  width: 200px; min-width: 200px;
-  background: white; border-right: 1px solid var(--border);
-  overflow-y: auto; padding: 10px 0;
-  flex: 0 0 200px;
+  display: none;
 }
 .sidebar-lesson-hd {
   padding: 6px 12px 2px;
@@ -200,7 +235,7 @@ body {
 .sbtn.done .sbtn-num { background: var(--grass); color: white; }
 .sbtn-label { font-size: 0.72rem; font-weight: 500; line-height: 1.3; color: var(--ink); }
 
-.steps-content { flex: 1; overflow-y: auto; padding: 18px 16px 60px; }
+.steps-content { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 18px 16px 80px; }
 
 /* Step panel */
 .step-panel { display: none; }
@@ -260,10 +295,11 @@ body {
 /* Speak button in step */
 .speak-btn {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 7px 14px; background: var(--ocean); color: white;
-  border: none; border-radius: 100px; font-size: 0.75rem; font-weight: 700;
+  padding: 10px 18px; background: var(--ocean); color: white;
+  border: none; border-radius: 100px; font-size: 0.8rem; font-weight: 700;
   cursor: pointer; margin: 10px 0 4px;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Noto Sans JP', sans-serif; min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Quiz */
@@ -278,9 +314,10 @@ body {
 .blank-line { display: inline-block; border-bottom: 2px solid var(--ocean); min-width: 65px; height: 1.2em; vertical-align: bottom; }
 .qi {
   border: 2px solid var(--border); border-radius: 8px;
-  padding: 7px 11px; width: 100%;
-  font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 700;
+  padding: 9px 12px; width: 100%;
+  font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 700;
   outline: none; color: var(--ink); transition: border-color 0.18s;
+  -webkit-appearance: none;
 }
 .qi:focus { border-color: var(--ocean); }
 .qi.ok { border-color: var(--grass); background: #F0FDF4; color: var(--grass); }
@@ -291,11 +328,12 @@ body {
 
 .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
 .btn {
-  padding: 8px 18px; border: none; border-radius: 100px;
-  font-family: 'Noto Sans JP', sans-serif; font-size: 0.76rem; font-weight: 700;
+  padding: 10px 20px; border: none; border-radius: 100px;
+  font-family: 'Noto Sans JP', sans-serif; font-size: 0.78rem; font-weight: 700;
   cursor: pointer; transition: opacity 0.15s, transform 0.1s;
+  min-height: 44px; -webkit-tap-highlight-color: transparent;
 }
-.btn:active { transform: scale(0.97); }
+.btn:active { transform: scale(0.97); opacity: 0.85; }
 .btn-blue { background: var(--ocean); color: white; }
 .btn-green { background: var(--grass); color: white; }
 .btn-ghost { background: var(--page-bg); color: var(--ocean); border: 2px solid var(--border); }
@@ -311,18 +349,19 @@ body {
 
 .fc-card-wrap { perspective: 1000px; margin-bottom: 16px; }
 .fc-card {
-  width: 100%; min-height: 180px;
+  width: 100%; min-height: 200px;
   position: relative; cursor: pointer;
   transform-style: preserve-3d; transition: transform 0.45s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 .fc-card.flipped { transform: rotateY(180deg); }
 .fc-face {
   position: absolute; inset: 0;
-  backface-visibility: hidden;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
   border-radius: 20px; padding: 28px 24px;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  text-align: center; min-height: 180px;
+  text-align: center; min-height: 200px;
 }
 .fc-front { background: linear-gradient(135deg, var(--ocean), #1D4ED8); color: white; }
 .fc-back { background: var(--card-bg); border: 2px solid var(--border); transform: rotateY(180deg); }
@@ -334,9 +373,10 @@ body {
 
 .fc-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 .fc-btn {
-  padding: 10px 22px; border: none; border-radius: 100px;
-  font-family: 'Noto Sans JP', sans-serif; font-size: 0.78rem; font-weight: 700;
+  padding: 12px 22px; border: none; border-radius: 100px;
+  font-family: 'Noto Sans JP', sans-serif; font-size: 0.82rem; font-weight: 700;
   cursor: pointer; transition: opacity 0.15s, transform 0.1s;
+  min-height: 48px; flex: 1; -webkit-tap-highlight-color: transparent;
 }
 .fc-btn:active { transform: scale(0.97); }
 .fc-ok { background: var(--grass); color: white; }
@@ -374,9 +414,9 @@ body {
 .review-a strong { color: var(--grass); }
 .review-input {
   border: 2px solid var(--border); border-radius: 8px;
-  padding: 7px 11px; width: 100%;
-  font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 700;
-  outline: none; margin-top: 6px; color: var(--ink);
+  padding: 9px 12px; width: 100%;
+  font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 700;
+  outline: none; margin-top: 6px; color: var(--ink); -webkit-appearance: none;
 }
 .review-input.ok { border-color: var(--grass); background: #F0FDF4; color: var(--grass); }
 .review-input.ng { border-color: var(--coral); background: #FEF2F2; }
@@ -384,6 +424,161 @@ body {
 @media (max-width: 600px) {
   .steps-sidebar { width: 170px; min-width: 170px; flex: 0 0 170px; }
 }
+
+
+/* ===== PHONICS ===== */
+.ph-wrap { padding: 16px; }
+.ph-top { margin-bottom: 14px; }
+.ph-page-title { font-family: "Nunito", sans-serif; font-size: 1.1rem; font-weight: 900; }
+.ph-page-sub { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+.ph-cat-tabs {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px;
+}
+.ph-cat-btn {
+  padding: 6px 14px; border-radius: 100px;
+  border: 2px solid var(--border); background: white;
+  font-family: "Noto Sans JP", sans-serif; font-size: 0.75rem; font-weight: 700;
+  cursor: pointer; transition: all 0.15s; color: var(--muted);
+}
+.ph-cat-btn.active { background: #FF6B9D; color: white; border-color: #FF6B9D; }
+
+.ph-panel { display: none; }
+.ph-panel.active { display: block; }
+
+.ph-rule-card {
+  background: var(--card-bg); border-radius: 16px;
+  border: 1px solid var(--border); padding: 18px 16px;
+  margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.ph-rule-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.ph-pattern-badge {
+  font-family: "Nunito", sans-serif; font-size: 1.4rem; font-weight: 900;
+  background: linear-gradient(135deg, #FF6B9D, #C44BC4);
+  color: white; padding: 6px 16px; border-radius: 10px;
+  letter-spacing: 1px;
+}
+.ph-rule-desc { font-size: 0.8rem; color: var(--ink); line-height: 1.5; font-weight: 500; }
+.ph-rule-reading {
+  font-family: "Nunito", sans-serif; font-size: 0.82rem; font-weight: 900;
+  color: #FF6B9D; margin-top: 2px;
+}
+
+.ph-words { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.ph-word-btn {
+  display: flex; flex-direction: column; align-items: center;
+  background: var(--page-bg); border-radius: 10px;
+  padding: 10px 14px; border: none; cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  min-width: 72px; min-height: 72px; justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.ph-word-btn:active { transform: scale(0.96); background: #FFE4F0; }
+.ph-word-en {
+  font-family: "Nunito", sans-serif; font-size: 1rem; font-weight: 900;
+  color: var(--ink);
+}
+.ph-word-highlight { color: #FF6B9D; }
+.ph-word-ja { font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
+.ph-word-icon { font-size: 1rem; margin-bottom: 2px; }
+
+.ph-notice {
+  background: #FFF0F6; border-left: 4px solid #FF6B9D;
+  border-radius: 0 8px 8px 0; padding: 9px 13px;
+  font-size: 0.77rem; line-height: 1.7; margin-top: 10px;
+}
+.ph-notice strong { color: #9B1B5A; }
+
+.ph-quiz-section { margin-top: 14px; }
+.ph-quiz-title { font-size: 0.68rem; font-weight: 700; color: var(--muted); margin-bottom: 8px; letter-spacing: 1px; }
+.ph-quiz-card {
+  background: var(--card-bg); border-radius: 12px;
+  border: 1px solid var(--border); padding: 13px 14px; margin-bottom: 9px;
+}
+.ph-quiz-prompt {
+  font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; line-height: 1.5;
+}
+.ph-choices { display: flex; flex-direction: column; gap: 8px; }
+.ph-choice {
+  padding: 11px 18px; border-radius: 100px;
+  border: 2px solid var(--border); background: white;
+  font-family: "Nunito", sans-serif; font-size: 0.88rem; font-weight: 800;
+  cursor: pointer; transition: all 0.15s;
+  min-height: 44px; -webkit-tap-highlight-color: transparent;
+  width: 100%; text-align: left;
+}
+.ph-choice:active { transform: scale(0.97); }
+.ph-choice.correct { background: var(--grass); color: white; border-color: var(--grass); }
+.ph-choice.wrong { background: var(--coral); color: white; border-color: var(--coral); }
+.ph-choice.disabled { opacity: 0.5; pointer-events: none; }
+.ph-result-msg { font-size: 0.8rem; font-weight: 700; margin-top: 8px; min-height: 20px; }
+.ph-result-msg.ok { color: var(--grass); }
+.ph-result-msg.ng { color: var(--coral); }
+
+/* ===== WORD QUIZ ===== */
+.wq-wrap { padding: 16px; }
+.wq-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.wq-title { font-family: "Nunito", sans-serif; font-size: 1rem; font-weight: 900; }
+.wq-score-display { font-family: "Nunito", sans-serif; font-size: 0.82rem; font-weight: 900; color: var(--ocean); }
+.wq-progress { margin-bottom: 16px; }
+.wq-prog-bar { background: var(--border); border-radius: 100px; height: 6px; overflow: hidden; }
+.wq-prog-fill { height: 100%; background: var(--purple); border-radius: 100px; transition: width 0.3s; }
+.wq-prog-label { font-size: 0.68rem; color: var(--muted); margin-top: 4px; }
+.wq-card {
+  background: var(--card-bg); border-radius: 20px;
+  padding: 24px 20px; border: 1px solid var(--border);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.wq-hint-tag {
+  display: inline-block; background: #EDE9FE; color: var(--purple);
+  font-size: 0.68rem; font-weight: 700; padding: 3px 10px;
+  border-radius: 100px; margin-bottom: 12px;
+}
+.wq-ja-word {
+  font-size: 1.5rem; font-weight: 700; margin-bottom: 10px;
+  color: var(--ink); text-align: center;
+}
+.wq-ex {
+  font-size: 0.78rem; color: var(--muted); text-align: center;
+  margin-bottom: 18px; line-height: 1.6;
+  background: var(--page-bg); border-radius: 8px; padding: 8px 12px;
+}
+.wq-input-wrap { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.wq-input {
+  flex: 1; border: 2px solid var(--border); border-radius: 12px;
+  padding: 12px 14px; font-family: "Nunito", sans-serif;
+  font-size: 16px; font-weight: 700; outline: none; color: var(--ink);
+  transition: border-color 0.18s; -webkit-appearance: none;
+}
+.wq-input:focus { border-color: var(--purple); }
+.wq-input.ok { border-color: var(--grass); background: #F0FDF4; color: var(--grass); }
+.wq-input.ng { border-color: var(--coral); background: #FEF2F2; }
+.wq-speak-btn {
+  width: 44px; height: 44px; border-radius: 50%; border: none;
+  background: var(--ocean); color: white; font-size: 1rem;
+  cursor: pointer; flex: 0 0 44px;
+}
+.wq-feedback {
+  min-height: 28px; font-size: 0.85rem; font-weight: 700;
+  text-align: center; padding: 4px 0;
+}
+.wq-feedback.ok { color: var(--grass); }
+.wq-feedback.ng { color: var(--coral); }
+.wq-result {
+  display: none; background: var(--card-bg); border-radius: 20px;
+  padding: 28px 20px; text-align: center; border: 1px solid var(--border);
+}
+.wq-result.show { display: block; }
+.wq-result-emoji { font-size: 2.8rem; margin-bottom: 10px; }
+.wq-result-title { font-family: "Nunito", sans-serif; font-size: 1.3rem; font-weight: 900; margin-bottom: 6px; }
+.wq-result-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 16px; }
+.wq-mistakes { text-align: left; }
+.wq-mistake-item {
+  background: #FEF2F2; border-radius: 10px; padding: 10px 14px;
+  margin-bottom: 8px; font-size: 0.82rem;
+}
+.wq-mistake-en { font-family: "Nunito", sans-serif; font-weight: 900; color: var(--coral); font-size: 1rem; }
+.wq-mistake-ja { color: var(--muted); font-size: 0.75rem; margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -394,11 +589,13 @@ body {
     <div class="header-streak" id="streak-display">🔥 0日連続</div>
   </div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="switchPage('home')">🏠 ホーム</button>
-    <button class="nav-tab" onclick="switchPage('daily')">☀️ 今日の1文</button>
-    <button class="nav-tab" onclick="switchPage('steps')">📚 30ステップ</button>
-    <button class="nav-tab" onclick="switchPage('flash')">🃏 単語カード</button>
-    <button class="nav-tab" onclick="switchPage('review')">⚠️ 苦手ノート</button>
+    <button class="nav-tab active" onclick="switchPage('home', this)" data-page="home">🏠 ホーム</button>
+    <button class="nav-tab" onclick="switchPage('daily', this)" data-page="daily">☀️ 今日の1文</button>
+    <button class="nav-tab" onclick="switchPage('steps', this)" data-page="steps">📚 30ステップ</button>
+    <button class="nav-tab" onclick="switchPage('flash', this)" data-page="flash">🃏 単語カード</button>
+    <button class="nav-tab" onclick="switchPage('wordquiz', this)" data-page="wordquiz">⌨️ 単語入力</button>
+    <button class="nav-tab" onclick="switchPage('phonics', this)" data-page="phonics">🔤 フォニックス</button>
+    <button class="nav-tab" onclick="switchPage('review', this)" data-page="review">⚠️ 苦手ノート</button>
   </div>
 </div>
 
@@ -423,7 +620,7 @@ body {
     </div>
   </div>
   <div class="home-cards">
-    <div class="home-card" onclick="switchPage('daily')">
+    <div class="home-card" onclick="switchPage('daily', this)" data-page="daily">
       <div class="home-card-icon" style="background:#EFF6FF">☀️</div>
       <div class="home-card-body">
         <div class="home-card-title">今日の1文</div>
@@ -431,7 +628,7 @@ body {
       </div>
       <div class="home-card-arrow">›</div>
     </div>
-    <div class="home-card" onclick="switchPage('steps')">
+    <div class="home-card" onclick="switchPage('steps', this)" data-page="steps">
       <div class="home-card-icon" style="background:#EFF6FF">📚</div>
       <div class="home-card-body">
         <div class="home-card-title">30ステップで学ぶ</div>
@@ -439,7 +636,7 @@ body {
       </div>
       <div class="home-card-arrow">›</div>
     </div>
-    <div class="home-card" onclick="switchPage('flash')">
+    <div class="home-card" onclick="switchPage('flash', this)" data-page="flash">
       <div class="home-card-icon" style="background:#F0FDF4">🃏</div>
       <div class="home-card-body">
         <div class="home-card-title">単語カード</div>
@@ -447,7 +644,23 @@ body {
       </div>
       <div class="home-card-arrow">›</div>
     </div>
-    <div class="home-card" onclick="switchPage('review')">
+    <div class="home-card" onclick="switchPage('phonics', this)" data-page="phonics">
+      <div class="home-card-icon" style="background:#FFF0F6">🔤</div>
+      <div class="home-card-body">
+        <div class="home-card-title">フォニックス</div>
+        <div class="home-card-desc">音と文字のルールを覚えて、読み方をマスター！</div>
+      </div>
+      <div class="home-card-arrow">›</div>
+    </div>
+    <div class="home-card" onclick="switchPage('wordquiz', this)" data-page="wordquiz">
+      <div class="home-card-icon" style="background:#FDF4FF">⌨️</div>
+      <div class="home-card-body">
+        <div class="home-card-title">単語入力テスト</div>
+        <div class="home-card-desc">日本語を見て英語をスペルまで正確に入力！</div>
+      </div>
+      <div class="home-card-arrow">›</div>
+    </div>
+    <div class="home-card" onclick="switchPage('review', this)" data-page="review">
       <div class="home-card-icon" style="background:#FEF2F2">⚠️</div>
       <div class="home-card-body">
         <div class="home-card-title">苦手ノート</div>
@@ -481,6 +694,10 @@ body {
 <!-- ===== STEPS ===== -->
 <div class="page" id="page-steps">
   <div class="steps-sidebar-wrap">
+    <div class="step-selector-bar">
+      <div class="step-selector-label">📚 ステップを選ぶ（1〜30）</div>
+      <div class="step-selector-grid" id="step-pills"></div>
+    </div>
     <div class="steps-sidebar" id="steps-sidebar"></div>
     <div class="steps-content" id="steps-content"></div>
   </div>
@@ -520,6 +737,53 @@ body {
       <div class="fc-result-title" id="fc-result-title">お疲れさま！</div>
       <div class="fc-result-sub" id="fc-result-sub"></div>
       <button class="btn btn-blue" onclick="resetFC()" style="margin-top:10px">もう一度やる</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PHONICS ===== -->
+<div class="page" id="page-phonics">
+  <div class="ph-wrap">
+    <div class="ph-top">
+      <div class="ph-page-title">🔤 フォニックス</div>
+      <div class="ph-page-sub">音と文字のルールを発見しよう</div>
+    </div>
+    <div class="ph-cat-tabs" id="ph-cat-tabs"></div>
+    <div id="ph-panels"></div>
+  </div>
+</div>
+
+<!-- ===== WORD QUIZ ===== -->
+<div class="page" id="page-wordquiz">
+  <div class="wq-wrap">
+    <div class="wq-header">
+      <div class="wq-title">⌨️ 単語入力テスト</div>
+      <div class="wq-score-display" id="wq-score-display">0 / 0</div>
+    </div>
+    <div class="wq-progress">
+      <div class="wq-prog-bar"><div class="wq-prog-fill" id="wq-prog-fill" style="width:0%"></div></div>
+      <div class="wq-prog-label" id="wq-prog-label">0 / 30 完了</div>
+    </div>
+    <div id="wq-card" class="wq-card">
+      <div class="wq-hint-tag" id="wq-hint-tag">動詞</div>
+      <div class="wq-ja-word" id="wq-ja-word">〜が好きだ</div>
+      <div class="wq-ex" id="wq-ex">I ___ soccer. / わたしはサッカーが好きです。</div>
+      <div class="wq-input-wrap">
+        <input class="wq-input" id="wq-input" placeholder="英語でスペルを入力…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        <button class="wq-speak-btn" onclick="speakText(document.getElementById('wq-input').value||'')">🔊</button>
+      </div>
+      <div class="wq-feedback" id="wq-feedback"></div>
+      <div class="btn-row" style="margin-top:14px;justify-content:center">
+        <button class="btn btn-green" id="wq-check-btn" onclick="checkWQ()" style="min-height:48px;font-size:0.88rem">確認する ✓</button>
+        <button class="btn btn-ghost" onclick="skipWQ()">スキップ →</button>
+      </div>
+    </div>
+    <div class="wq-result" id="wq-result">
+      <div class="wq-result-emoji" id="wq-result-emoji">🎉</div>
+      <div class="wq-result-title" id="wq-result-title">テスト完了！</div>
+      <div class="wq-result-sub" id="wq-result-sub"></div>
+      <div class="wq-mistakes" id="wq-mistakes"></div>
+      <button class="btn btn-blue" onclick="resetWQ()" style="margin-top:14px">もう一度やる</button>
     </div>
   </div>
 </div>
@@ -900,13 +1164,22 @@ function updateStreak() {
 updateStreak();
 
 // ===== TABS =====
-function switchPage(id) {
+function switchPage(id, tabEl) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  event.target.classList.add('active');
+  const page = document.getElementById('page-'+id);
+  if(page) page.classList.add('active');
+  // find the tab button if not passed
+  if(tabEl) {
+    tabEl.classList.add('active');
+  } else {
+    const found = document.querySelector('.nav-tab[data-page="'+id+'"]');
+    if(found) found.classList.add('active');
+  }
   if (id==='review') renderReview();
   if (id==='home') updateHomeRing();
+  // scroll page to top
+  if(page) page.scrollTop = 0;
 }
 
 // ===== HOME RING =====
@@ -962,6 +1235,15 @@ lessons.forEach(lesson => {
     btn.innerHTML = `<span class="sbtn-num">${step.num}</span><span class="sbtn-label">${step.title}</span>`;
     sidebar.appendChild(btn);
 
+    // pill button
+    const pill = document.createElement('button');
+    pill.className = 'step-pill' + (doneSteps.has(step.num)?' done':'');
+    pill.id = 'pill-'+step.num;
+    pill.textContent = step.num;
+    pill.title = step.title;
+    pill.onclick = () => showStep(step.num);
+    document.getElementById('step-pills').appendChild(pill);
+
     // panel
     const panel = document.createElement('div');
     panel.className = 'step-panel';
@@ -1004,8 +1286,12 @@ lessons.forEach(lesson => {
     const prev = step.num > 1 ? step.num-1 : null;
     const next = step.num < 30 ? step.num+1 : null;
 
-    // First example sentence for speak
-    const speakSample = step.examples[0].en.map(([w])=>w).filter(w=>!['.',',','?','!',''].includes(w)).join(' ');
+    // First example sentence for speak (handle both compare and normal)
+    const speakSample = (() => {
+      const ex = step.examples[0];
+      const arr = step.compare ? ex.right : ex.en;
+      return arr.map(([w])=>w).filter(w=>!['.',',','?','!',''].includes(w)).join(' ');
+    })();
 
     panel.innerHTML = `
       <div class="sp-lesson-tag">${lesson.lesson} ｜ No.${step.num}</div>
@@ -1043,9 +1329,12 @@ lessons.forEach(lesson => {
 function showStep(num) {
   document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.step-pill').forEach(p=>p.classList.remove('active'));
   document.getElementById('spanel-'+num).classList.add('active');
   const btn = document.getElementById('sbtn-'+num);
   if(btn) btn.classList.add('active');
+  const pill = document.getElementById('pill-'+num);
+  if(pill){ pill.classList.add('active'); pill.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }
   document.getElementById('steps-content').scrollTop = 0;
 }
 showStep(1);
@@ -1094,6 +1383,8 @@ function checkAllStep(stepNum) {
     saveState();
     const btn=document.getElementById('sbtn-'+stepNum);
     if(btn){btn.classList.add('done');}
+    const pill=document.getElementById('pill-'+stepNum);
+    if(pill){pill.classList.add('done');}
     updateHomeRing();
   }
 }
@@ -1187,6 +1478,475 @@ function removeWeak(i){
   saveState();
   renderReview();
 }
+
+// ===== WORD QUIZ =====
+let wqIndex = 0, wqCorrect = 0, wqMistakes = [];
+let wqOrder = [];
+
+function shuffleWQ() {
+  wqOrder = [...Array(flashwords.length).keys()];
+  for(let i=wqOrder.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [wqOrder[i],wqOrder[j]]=[wqOrder[j],wqOrder[i]];
+  }
+}
+
+function renderWQ() {
+  const w = flashwords[wqOrder[wqIndex]];
+  document.getElementById('wq-hint-tag').textContent = w.hint;
+  document.getElementById('wq-ja-word').textContent = w.ja;
+  // Show example with blank
+  const exLine = w.ex.split('
+')[1] || '';
+  document.getElementById('wq-ex').textContent = `例）${exLine}`;
+  document.getElementById('wq-input').value = '';
+  document.getElementById('wq-input').className = 'wq-input';
+  document.getElementById('wq-feedback').textContent = '';
+  document.getElementById('wq-feedback').className = 'wq-feedback';
+  document.getElementById('wq-check-btn').disabled = false;
+  document.getElementById('wq-prog-fill').style.width = (wqIndex/flashwords.length*100)+'%';
+  document.getElementById('wq-prog-label').textContent = `${wqIndex} / ${flashwords.length} 完了`;
+  document.getElementById('wq-score-display').textContent = `✅ ${wqCorrect} / ${wqIndex}`;
+  document.getElementById('wq-input').focus();
+}
+
+function checkWQ() {
+  const w = flashwords[wqOrder[wqIndex]];
+  const input = document.getElementById('wq-input');
+  const val = input.value.trim().toLowerCase();
+  const ans = w.en.toLowerCase();
+  const fb = document.getElementById('wq-feedback');
+  input.classList.remove('ok','ng');
+  if(val === ans) {
+    input.classList.add('ok');
+    fb.className = 'wq-feedback ok';
+    fb.textContent = '🎉 正解！ ' + w.en;
+    wqCorrect++;
+    speakText(w.en);
+    document.getElementById('wq-check-btn').disabled = true;
+    setTimeout(()=>advanceWQ(), 1200);
+  } else if(val === '') {
+    fb.className = 'wq-feedback ng';
+    fb.textContent = 'スペルを入力してね！';
+  } else {
+    input.classList.add('ng');
+    fb.className = 'wq-feedback ng';
+    fb.textContent = `✗ 正解は「${w.en}」`;
+    wqMistakes.push({en:w.en, ja:w.ja});
+    document.getElementById('wq-check-btn').disabled = true;
+    setTimeout(()=>advanceWQ(), 1800);
+  }
+}
+
+function skipWQ() { advanceWQ(); }
+
+function advanceWQ() {
+  wqIndex++;
+  if(wqIndex >= flashwords.length) {
+    showWQResult(); return;
+  }
+  renderWQ();
+}
+
+function showWQResult() {
+  document.getElementById('wq-card').style.display = 'none';
+  const res = document.getElementById('wq-result');
+  res.classList.add('show');
+  const pct = Math.round(wqCorrect/flashwords.length*100);
+  document.getElementById('wq-result-emoji').textContent = pct>=90?'🎉':pct>=60?'😊':'💪';
+  document.getElementById('wq-result-title').textContent = pct>=90?'すごい！満点に近いよ！':pct>=60?'よくがんばりました！':'もう一度挑戦しよう！';
+  document.getElementById('wq-result-sub').textContent = `${wqCorrect} / ${flashwords.length} 問正解（${pct}%）`;
+  document.getElementById('wq-prog-fill').style.width = '100%';
+  document.getElementById('wq-prog-label').textContent = `${flashwords.length} / ${flashwords.length} 完了`;
+  let mistakeHTML = '';
+  if(wqMistakes.length > 0) {
+    mistakeHTML = `<div style="font-size:0.78rem;font-weight:700;color:var(--coral);margin-bottom:8px">⚠️ 間違えた単語（${wqMistakes.length}語）</div>`;
+    wqMistakes.forEach(m=>{
+      mistakeHTML += `<div class="wq-mistake-item"><div class="wq-mistake-en">${m.en}</div><div class="wq-mistake-ja">${m.ja}</div></div>`;
+    });
+  }
+  document.getElementById('wq-mistakes').innerHTML = mistakeHTML;
+}
+
+function resetWQ() {
+  wqIndex=0; wqCorrect=0; wqMistakes=[];
+  shuffleWQ();
+  document.getElementById('wq-card').style.display='';
+  document.getElementById('wq-result').classList.remove('show');
+  renderWQ();
+}
+
+// Initialize word quiz
+shuffleWQ();
+renderWQ();
+
+// Add Enter key support for word quiz
+document.getElementById('wq-input').addEventListener('keydown', function(e){
+  if(e.key==='Enter') checkWQ();
+});
+
+// ===== PHONICS DATA =====
+const phonicsData = [
+  {
+    cat: "母音の読み方",
+    color: "#FF6B9D",
+    rules: [
+      {
+        pattern: "a", reading: "「ア」の短音",
+        desc: "単語の中の「a」は「ア」と読むことが多い",
+        words: [
+          {en:"cat", ja:"ネコ", icon:"🐱", hi:[0,1]},
+          {en:"bag", ja:"かばん", icon:"👜", hi:[0,1]},
+          {en:"hat", ja:"ぼうし", icon:"🎩", hi:[0,1]},
+          {en:"map", ja:"地図", icon:"🗺️", hi:[0,1]},
+          {en:"hand", ja:"手", icon:"✋", hi:[0,1]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>「cat」の「a」は「キャット」の「ア」！「エイ」とは読まない。',
+        quiz: {q:"「bag」のaはどう読む？", choices:["ア（バッグ）","エイ（ベイグ）","オー（ボッグ）"], ans:0, exp:"bagは「バッグ」！aは短い「ア」の音。"}
+      },
+      {
+        pattern: "e", reading: "「エ」の短音",
+        desc: "単語の中の「e」は「エ」と読むことが多い",
+        words: [
+          {en:"pen", ja:"ペン", icon:"🖊️", hi:[0,1]},
+          {en:"bed", ja:"ベッド", icon:"🛏️", hi:[0,1]},
+          {en:"ten", ja:"10", icon:"🔢", hi:[0,1]},
+          {en:"red", ja:"赤", icon:"🔴", hi:[0,1]},
+          {en:"leg", ja:"足", icon:"🦵", hi:[0,1]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>「pen」の「e」は「ペン」の「エ」！',
+        quiz: {q:"「bed」のeはどう読む？", choices:["エ（ベッド）","イー（ビード）","エイ（ベイド）"], ans:0, exp:"bedは「ベッド」！eは短い「エ」の音。"}
+      },
+      {
+        pattern: "i", reading: "「イ」の短音",
+        desc: "単語の中の「i」は「イ」と読むことが多い",
+        words: [
+          {en:"fish", ja:"魚", icon:"🐟", hi:[0,1]},
+          {en:"hit", ja:"打つ", icon:"⚾", hi:[0,1]},
+          {en:"sit", ja:"座る", icon:"🪑", hi:[0,1]},
+          {en:"big", ja:"大きい", icon:"🐘", hi:[0,1]},
+          {en:"milk", ja:"牛乳", icon:"🥛", hi:[0,1]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>「fish」の「i」は「フィッシュ」の「イ」！「アイ」とは読まない。',
+        quiz: {q:"「big」のiはどう読む？", choices:["イ（ビッグ）","アイ（バイグ）","イー（ビーグ）"], ans:0, exp:"bigは「ビッグ」！iは短い「イ」の音。"}
+      },
+      {
+        pattern: "o", reading: "「オ」の短音",
+        desc: "単語の中の「o」は「オ」と読むことが多い",
+        words: [
+          {en:"dog", ja:"犬", icon:"🐶", hi:[0,1]},
+          {en:"box", ja:"箱", icon:"📦", hi:[0,1]},
+          {en:"hot", ja:"熱い", icon:"🔥", hi:[0,1]},
+          {en:"mom", ja:"お母さん", icon:"👩", hi:[0,1]},
+          {en:"stop", ja:"止まる", icon:"🛑", hi:[1,2]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>「dog」の「o」は「ドッグ」の「オ」！',
+        quiz: {q:"「box」のoはどう読む？", choices:["オ（ボックス）","オウ（ボウクス）","ユー（ビュークス）"], ans:0, exp:"boxは「ボックス」！oは短い「オ」の音。"}
+      },
+      {
+        pattern: "u", reading: "「ア」の短音（口を丸めず）",
+        desc: "単語の中の「u」は「ア」（口を丸めない）と読む",
+        words: [
+          {en:"bus", ja:"バス", icon:"🚌", hi:[0,1]},
+          {en:"cup", ja:"カップ", icon:"☕", hi:[0,1]},
+          {en:"sun", ja:"太陽", icon:"☀️", hi:[0,1]},
+          {en:"run", ja:"走る", icon:"🏃", hi:[0,1]},
+          {en:"lunch", ja:"昼食", icon:"🍱", hi:[0,1]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>「bus」の「u」は「バス」の「ア」！「ユー」ではない。',
+        quiz: {q:"「cup」のuはどう読む？", choices:["ア（カップ）","ユー（キュープ）","ウー（クープ）"], ans:0, exp:"cupは「カップ」！uは短い「ア」の音（バ行のア）。"}
+      },
+    ]
+  },
+  {
+    cat: "2文字の組み合わせ",
+    color: "#6366F1",
+    rules: [
+      {
+        pattern: "sh", reading: "「シュ」の音",
+        desc: "s＋hで「シュ」という音になる",
+        words: [
+          {en:"she", ja:"彼女", icon:"👩", hi:[0,2]},
+          {en:"shop", ja:"お店", icon:"🏪", hi:[0,2]},
+          {en:"fish", ja:"魚", icon:"🐟", hi:[2,4]},
+          {en:"wish", ja:"願い", icon:"⭐", hi:[2,4]},
+          {en:"shirt", ja:"シャツ", icon:"👕", hi:[0,2]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>sとhが並んだら「シュ」！sだけなら「ス」、hだけなら「フ（ハ行）」だけど、合わさると「シュ」に変わる。',
+        quiz: {q:"「shop」のshはどう読む？", choices:["シュ（ショップ）","スフ（スホップ）","チ（チョップ）"], ans:0, exp:"shopは「ショップ」！shは「シュ」の音。"}
+      },
+      {
+        pattern: "ch", reading: "「チュ」の音",
+        desc: "c＋hで「チュ」という音になる",
+        words: [
+          {en:"chair", ja:"いす", icon:"🪑", hi:[0,2]},
+          {en:"lunch", ja:"昼食", icon:"🍱", hi:[3,5]},
+          {en:"check", ja:"確認", icon:"✅", hi:[0,2]},
+          {en:"catch", ja:"つかまえる", icon:"⚾", hi:[2,5]},
+          {en:"much", ja:"たくさん", icon:"💰", hi:[2,4]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>chは「チュ」！「school」のchは例外で「ク」と読む。',
+        quiz: {q:"「lunch」のchはどう読む？", choices:["チュ（ランチ）","ク（ランク）","シュ（ランシュ）"], ans:0, exp:"lunchは「ランチ」！chは「チュ」の音。"}
+      },
+      {
+        pattern: "th", reading: "舌を歯ではさむ音",
+        desc: "t＋hで舌を上下の歯ではさんで出す音",
+        words: [
+          {en:"this", ja:"これ", icon:"👇", hi:[0,2]},
+          {en:"that", ja:"あれ", icon:"👉", hi:[0,2]},
+          {en:"the", ja:"その（定冠詞）", icon:"📌", hi:[0,2]},
+          {en:"think", ja:"思う", icon:"💭", hi:[0,2]},
+          {en:"three", ja:"3", icon:"3️⃣", hi:[0,2]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>舌を軽く歯ではさんで「ス」と息を出す音！「this/that/the」は濁った「ズ」のような音。',
+        quiz: {q:"「this」のthはどんな音？", choices:["舌を歯ではさむ音","「タ」の音","「サ」の音"], ans:0, exp:"thisのthは舌を歯ではさんで出す特別な音！"}
+      },
+      {
+        pattern: "wh", reading: "「ウ（フ）」の音",
+        desc: "疑問詞によく使われる。「ホ」または「ウ」の音",
+        words: [
+          {en:"what", ja:"何", icon:"❓", hi:[0,2]},
+          {en:"where", ja:"どこ", icon:"📍", hi:[0,2]},
+          {en:"when", ja:"いつ", icon:"⏰", hi:[0,2]},
+          {en:"who", ja:"だれ", icon:"🙋", hi:[0,2]},
+          {en:"which", ja:"どちら", icon:"↔️", hi:[0,2]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>wh疑問詞は全部「wh」で始まる。whoだけ「フー」、他は「ホワ/ホウ/ホエ」のように読む。',
+        quiz: {q:"「where」のwhはどう読む？", choices:["ホウ（ホウェア）","ヴ（ヴェア）","ス（スウェア）"], ans:0, exp:"whereは「ホウェア」！whは「ホウ」の音。"}
+      },
+    ]
+  },
+  {
+    cat: "母音の組み合わせ",
+    color: "#F59E0B",
+    rules: [
+      {
+        pattern: "ee/ea", reading: "「イー」の長音",
+        desc: "eが2つ並んだり、eaの組み合わせは「イー」と長く読む",
+        words: [
+          {en:"see", ja:"見る", icon:"👀", hi:[1,3]},
+          {en:"tree", ja:"木", icon:"🌳", hi:[2,4]},
+          {en:"eat", ja:"食べる", icon:"🍴", hi:[0,2]},
+          {en:"meat", ja:"肉", icon:"🥩", hi:[1,3]},
+          {en:"teach", ja:"教える", icon:"👩‍🏫", hi:[1,3]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>ee・ea は「イー」！see=「スィー」、eat=「イート」。',
+        quiz: {q:"「see」のeeはどう読む？", choices:["イー（スィー）","エ（セ）","エイ（セイ）"], ans:0, exp:"seeは「スィー」！eeは長い「イー」の音。"}
+      },
+      {
+        pattern: "oo", reading: "「ウー」の長音",
+        desc: "oが2つ並ぶと「ウー」と長く読む",
+        words: [
+          {en:"school", ja:"学校", icon:"🏫", hi:[2,4]},
+          {en:"food", ja:"食べ物", icon:"🍔", hi:[1,3]},
+          {en:"book", ja:"本", icon:"📚", hi:[1,3]},
+          {en:"cool", ja:"かっこいい", icon:"😎", hi:[1,3]},
+          {en:"room", ja:"部屋", icon:"🏠", hi:[1,3]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>oo は「ウー」！school=「スクール」、food=「フード」。bookだけ「ブック」と短く読む例外あり。',
+        quiz: {q:"「food」のooはどう読む？", choices:["ウー（フード）","オー（フォード）","オ（フォッド）"], ans:0, exp:"foodは「フード」！ooは長い「ウー」の音。"}
+      },
+      {
+        pattern: "ai/ay", reading: "「エイ」の音",
+        desc: "aiやayは「エイ」と読む",
+        words: [
+          {en:"rain", ja:"雨", icon:"🌧️", hi:[1,3]},
+          {en:"train", ja:"電車", icon:"🚂", hi:[2,5]},
+          {en:"play", ja:"する・遊ぶ", icon:"🎮", hi:[2,4]},
+          {en:"day", ja:"日", icon:"📅", hi:[1,3]},
+          {en:"say", ja:"言う", icon:"💬", hi:[1,3]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>ai・ay は「エイ」！rain=「レイン」、play=「プレイ」。',
+        quiz: {q:"「play」のayはどう読む？", choices:["エイ（プレイ）","ア（プラ）","イ（プリ）"], ans:0, exp:"playは「プレイ」！ayは「エイ」の音。"}
+      },
+      {
+        pattern: "er/ir/ur", reading: "「アー（ア↑）」の音",
+        desc: "er・ir・urは「アー」（口を少し開けて）と読む",
+        words: [
+          {en:"her", ja:"彼女の/を", icon:"👩", hi:[1,3]},
+          {en:"after", ja:"〜の後", icon:"⏭️", hi:[3,5]},
+          {en:"sister", ja:"姉・妹", icon:"👧", hi:[3,6]},
+          {en:"bird", ja:"鳥", icon:"🐦", hi:[1,3]},
+          {en:"turn", ja:"曲がる・順番", icon:"↩️", hi:[1,3]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>er/ir/ur は全部「アー」のような音！her=「ハー」、sister=「スィスター」、bird=「バード」。',
+        quiz: {q:"「sister」の最後のerはどう読む？", choices:["ター（スィスター）","テル（スィステル）","テア（スィステア）"], ans:0, exp:"sisterは「スィスター」！erは「ター」のような音になる。"}
+      },
+      {
+        pattern: "ou/ow", reading: "「アウ」の音",
+        desc: "ouやowは「アウ」と読む（例外もあり）",
+        words: [
+          {en:"house", ja:"家", icon:"🏠", hi:[1,3]},
+          {en:"out", ja:"外へ", icon:"🚪", hi:[0,2]},
+          {en:"now", ja:"今", icon:"⏰", hi:[1,3]},
+          {en:"how", ja:"どのように", icon:"🤔", hi:[1,3]},
+          {en:"down", ja:"下へ", icon:"⬇️", hi:[1,3]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>ou・ow は「アウ」！house=「ハウス」、now=「ナウ」。ただし「know」のowは「オウ」と読む例外あり。',
+        quiz: {q:"「how」のowはどう読む？", choices:["アウ（ハウ）","オウ（ホウ）","ウー（フー）"], ans:0, exp:"howは「ハウ」！owは「アウ」の音。"}
+      },
+    ]
+  },
+  {
+    cat: "語末のパターン",
+    color: "#10B981",
+    rules: [
+      {
+        pattern: "e（語末）", reading: "前の母音を「長く」する",
+        desc: "語末のeは読まない！その代わり前の母音を長くする（マジックe）",
+        words: [
+          {en:"name", ja:"名前", icon:"📛", hi:[1,2]},
+          {en:"make", ja:"作る", icon:"🔨", hi:[1,2]},
+          {en:"like", ja:"好き", icon:"❤️", hi:[1,2]},
+          {en:"come", ja:"来る", icon:"🚶", hi:[1,2]},
+          {en:"use", ja:"使う", icon:"⚙️", hi:[1,2]},
+        ],
+        notice: '<strong>✨ マジックe：</strong>「name」→「n<strong>a</strong>m<u>e</u>」語末のeが前の「a」を「エイ」に変える！nam（ナム）→name（ネイム）。',
+        quiz: {q:"「like」はなぜ「ライク」と読む？", choices:["語末のeがiを「アイ」に変えるから","iはいつも「アイ」と読むから","liで「ライ」と読むから"], ans:0, exp:"語末のeがマジックをかけてiを「アイ」に変える！lik（リク）→like（ライク）。"}
+      },
+      {
+        pattern: "ing", reading: "「イング」の音",
+        desc: "動詞の語尾につくingは「イング」と読む",
+        words: [
+          {en:"playing", ja:"している", icon:"🎮", hi:[4,7]},
+          {en:"studying", ja:"勉強している", icon:"📚", hi:[5,8]},
+          {en:"running", ja:"走っている", icon:"🏃", hi:[4,7]},
+          {en:"eating", ja:"食べている", icon:"🍴", hi:[3,6]},
+          {en:"coming", ja:"来ている", icon:"🚶", hi:[4,7]},
+        ],
+        notice: '<strong>✨ ポイント：</strong>現在進行形のingは「イング」！playing=「プレイイング」、running=「ランニング」。',
+        quiz: {q:"「playing」のingはどう読む？", choices:["イング（プレイイング）","アング（プレイアング）","エング（プレイエング）"], ans:0, exp:"playingは「プレイイング」！ingは「イング」の音。"}
+      },
+      {
+        pattern: "ed（過去形）", reading: "3通りの読み方",
+        desc: "動詞の過去形edは「ド」「ト」「イド」の3通り",
+        words: [
+          {en:"played", ja:"した（過去）", icon:"🎮", hi:[4,6]},
+          {en:"watched", ja:"見た（過去）", icon:"📺", hi:[5,7]},
+          {en:"wanted", ja:"ほしかった", icon:"⭐", hi:[4,6]},
+          {en:"studied", ja:"勉強した", icon:"📚", hi:[5,7]},
+          {en:"needed", ja:"必要だった", icon:"✅", hi:[4,6]},
+        ],
+        notice: '<strong>✨ 3通りの読み方：</strong>①「ド」played（プレイド）②「ト」watched（ウォッチト）③「イド」wanted（ウォンティド）※d/tで終わる語はイド。',
+        quiz: {q:"「played」のedはどう読む？", choices:["ド（プレイド）","ト（プレイト）","イド（プレイイド）"], ans:0, exp:"playedは「プレイド」！dの音で終わる語のedは「ド」。"}
+      },
+      {
+        pattern: "s（三単現・複数）", reading: "「ズ」または「ス」",
+        desc: "語末のsは「ズ」か「ス」か単語による",
+        words: [
+          {en:"cats", ja:"ネコたち", icon:"🐱", hi:[3,4]},
+          {en:"dogs", ja:"犬たち", icon:"🐶", hi:[3,4]},
+          {en:"likes", ja:"好きです（三単現）", icon:"❤️", hi:[4,5]},
+          {en:"plays", ja:"する（三単現）", icon:"🎮", hi:[4,5]},
+          {en:"books", ja:"本たち", icon:"📚", hi:[4,5]},
+        ],
+        notice: '<strong>✨ 使い分け：</strong>濁った音(b/d/g/m/n)の後→「ズ」（dogs=ドッグズ）。無声音(k/p/t)の後→「ス」（cats=キャッツ）。',
+        quiz: {q:"「dogs」の語末sはどう読む？", choices:["ズ（ドッグズ）","ス（ドッグス）","イズ（ドッグイズ）"], ans:0, exp:"dogsは「ドッグズ」！gの後なのでsは「ズ」と読む。"}
+      },
+    ]
+  },
+];
+
+// ===== PHONICS RENDER =====
+const phCatTabs = document.getElementById('ph-cat-tabs');
+const phPanels = document.getElementById('ph-panels');
+
+phonicsData.forEach((cat, ci) => {
+  // Category tab
+  const catBtn = document.createElement('button');
+  catBtn.className = 'ph-cat-btn' + (ci===0?' active':'');
+  catBtn.textContent = cat.cat;
+  catBtn.style.setProperty('--cat-color', cat.color);
+  catBtn.onclick = () => {
+    document.querySelectorAll('.ph-cat-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.ph-panel').forEach(p=>p.classList.remove('active'));
+    catBtn.classList.add('active');
+    document.getElementById('ph-panel-'+ci).classList.add('active');
+    catBtn.style.background = cat.color;
+    catBtn.style.borderColor = cat.color;
+    catBtn.style.color = 'white';
+    document.querySelectorAll('.ph-cat-btn').forEach(b=>{
+      if(!b.classList.contains('active')){
+        b.style.background='';b.style.borderColor='';b.style.color='';
+      }
+    });
+  };
+  if(ci===0){catBtn.style.background=cat.color;catBtn.style.borderColor=cat.color;catBtn.style.color='white';}
+  phCatTabs.appendChild(catBtn);
+
+  // Panel
+  const panel = document.createElement('div');
+  panel.className = 'ph-panel' + (ci===0?' active':'');
+  panel.id = 'ph-panel-'+ci;
+
+  let panelHTML = '';
+  cat.rules.forEach((rule, ri) => {
+    const rid = `ph_${ci}_${ri}`;
+    // words HTML
+    let wordsHTML = rule.words.map(w => {
+      // highlight the pattern
+      let enHTML = '';
+      for(let i=0;i<w.en.length;i++){
+        if(i>=w.hi[0] && i<w.hi[1]){
+          enHTML += `<span class="ph-word-highlight">${w.en[i]}</span>`;
+        } else {
+          enHTML += w.en[i];
+        }
+      }
+      return `<button class="ph-word-btn" onclick="speakText('${w.en}')">
+        <span class="ph-word-icon">${w.icon}</span>
+        <span class="ph-word-en">${enHTML}</span>
+        <span class="ph-word-ja">${w.ja}</span>
+      </button>`;
+    }).join('');
+
+    // choices HTML
+    const choicesHTML = rule.quiz.choices.map((c,ci2)=>
+      `<button class="ph-choice" onclick="checkPhChoice(this,'${rid}',${ci2},${rule.quiz.ans},'${rule.quiz.exp.replace(/'/g,"\'")}')"> ${c}</button>`
+    ).join('');
+
+    panelHTML += `
+    <div class="ph-rule-card">
+      <div class="ph-rule-header">
+        <div class="ph-pattern-badge" style="background:linear-gradient(135deg,${cat.color},${cat.color}AA)">${rule.pattern}</div>
+        <div>
+          <div class="ph-rule-desc">${rule.desc}</div>
+          <div class="ph-rule-reading">🔊 読み方：${rule.reading}</div>
+        </div>
+      </div>
+      <div class="ph-words">${wordsHTML}</div>
+      <div class="ph-notice">${rule.notice}</div>
+      <div class="ph-quiz-section">
+        <div class="ph-quiz-title">✏️ 確認クイズ</div>
+        <div class="ph-quiz-card" id="${rid}">
+          <div class="ph-quiz-prompt">${rule.quiz.q}</div>
+          <div class="ph-choices">${choicesHTML}</div>
+          <div class="ph-result-msg" id="msg-${rid}"></div>
+        </div>
+      </div>
+    </div>`;
+  });
+  panel.innerHTML = panelHTML;
+  phPanels.appendChild(panel);
+});
+
+function checkPhChoice(btn, rid, chosen, ans, exp) {
+  const card = document.getElementById(rid);
+  const allBtns = card.querySelectorAll('.ph-choice');
+  const msg = document.getElementById('msg-'+rid);
+  allBtns.forEach(b=>b.classList.add('disabled'));
+  if(chosen===ans){
+    btn.classList.add('correct');
+    msg.className='ph-result-msg ok';
+    msg.textContent='🎉 正解！ '+exp;
+  } else {
+    btn.classList.add('wrong');
+    allBtns[ans].classList.add('correct');
+    msg.className='ph-result-msg ng';
+    msg.textContent='✗ '+exp;
+  }
+}
+
 </script>
 </body>
 </html>
