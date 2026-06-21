@@ -91,11 +91,9 @@ html { height: -webkit-fill-available; }
 .nav-tab.active { color: white; border-bottom-color: var(--sun); }
 
 /* ===== MAIN ===== */
-.main { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.main { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
 .page { display: none; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-.page.active { display: flex; flex-direction: column; }
-#page-home.active, #page-daily.active, #page-flash.active,
-#page-wordquiz.active, #page-review.active, #page-phonics.active { display: block; }
+.page.active { display: block; }
 #page-steps.active { display: flex; flex-direction: column; }
 
 /* ===== HOME PAGE ===== */
@@ -1900,9 +1898,9 @@ phonicsData.forEach((cat, ci) => {
       </button>`;
     }).join('');
 
-    // choices HTML
+    // choices HTML - store exp in data attribute to avoid quote issues
     const choicesHTML = rule.quiz.choices.map((c,ci2)=>
-      `<button class="ph-choice" onclick="checkPhChoice(this,'${rid}',${ci2},${rule.quiz.ans},'${rule.quiz.exp.replace(/'/g,"\'")}')"> ${c}</button>`
+      `<button class="ph-choice" onclick="checkPhChoice(this,'${rid}',${ci2},${rule.quiz.ans})" data-exp="${rule.quiz.exp.replace(/"/g,'&quot;')}"> ${c}</button>`
     ).join('');
 
     panelHTML += `
@@ -1930,7 +1928,8 @@ phonicsData.forEach((cat, ci) => {
   phPanels.appendChild(panel);
 });
 
-function checkPhChoice(btn, rid, chosen, ans, exp) {
+function checkPhChoice(btn, rid, chosen, ans) {
+  const exp = btn.getAttribute('data-exp') || '';
   const card = document.getElementById(rid);
   const allBtns = card.querySelectorAll('.ph-choice');
   const msg = document.getElementById('msg-'+rid);
