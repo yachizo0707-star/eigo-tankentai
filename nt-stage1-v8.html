@@ -2044,6 +2044,12 @@ function renderWQ(){
   document.getElementById('wq-lbl').textContent=wqIdx+' / '+wqWords.length+' 完了';
   document.getElementById('wq-score').textContent='✅ '+wqCorrect+' / '+wqIdx;
   document.getElementById('wq-check').disabled=false;
+  // 追加された「次へ」ボタンを削除してwq-skipを復元
+  var btnsEl=document.querySelector('.wq-btns');
+  var extraBtns=btnsEl.querySelectorAll('.btn-blue,.btn-ghost');
+  extraBtns.forEach(function(b){if(b.id!=='wq-check'&&b.id!=='wq-skip')b.remove();});
+  var skip=document.getElementById('wq-skip');
+  if(skip)skip.style.display='';
 }
 function checkWQ(){
   var w=wqWords[wqOrder[wqIdx]];
@@ -2298,10 +2304,15 @@ function doSQCheck(){
 function showSQNext(isOk){
   var btnsEl=document.querySelector('#sq-area .sq-btns');
   if(!btnsEl)return;
-  document.getElementById('sq-check').style.display='none';
-  document.getElementById('sq-showans').style.display='none';
+  var checkBtn=document.getElementById('sq-check');
+  var showBtn=document.getElementById('sq-showans');
+  if(checkBtn)checkBtn.style.display='none';
+  if(showBtn)showBtn.style.display='none';
+  // 既存の次へボタンがあれば削除
+  var existing=btnsEl.querySelector('.sq-next-btn');
+  if(existing)existing.remove();
   var nb=document.createElement('button');
-  nb.className=isOk?'btn btn-blue':'btn btn-ghost';
+  nb.className='btn '+(isOk?'btn-blue':'btn-ghost')+' sq-next-btn';
   nb.textContent='次へ →';
   nb.style.minHeight='46px';
   nb.addEventListener('click',function(){sqIdx++;renderSQ();});
@@ -3061,19 +3072,34 @@ if(charRowPr){
     charRowPr.appendChild(btn);
   });
 
-  // クイズ生成
+  // クイズ生成（イベント委譲方式でSafari対応）
   var quizAreaPr=document.getElementById('quiz-area-pr');
   prQuizzes.forEach(function(qz,qi){
     var qid='prqz'+qi;
     var div=document.createElement('div');
     div.className='quiz-card-pr';div.id=qid;
+    var choicesHTML=qz.cs.map(function(c,ci){
+      return '<button class="quiz-choice-pr" data-qid="'+qid+'" data-idx="'+ci+'" data-ans="'+qz.ans+'" data-exp="'+qz.exp.replace(/"/g,'&quot;')+'">'+c+'</button>';
+    }).join('');
     div.innerHTML='<div class="quiz-q-pr">'+qz.q.replace('[  ]','<span class="quiz-blank-pr"></span>')+'</div>'
-      +'<div class="quiz-choices-pr">'
-      +qz.cs.map(function(c,ci){
-        return '<button class="quiz-choice-pr" onclick="prAns(\''+qid+'\','+ci+','+qz.ans+',\''+qz.exp.replace(/'/g,"\\'")+'\')" >'+c+'</button>';
-      }).join('')
-      +'</div><div class="quiz-msg-pr" id="msg-'+qid+'"></div>';
+      +'<div class="quiz-choices-pr">'+choicesHTML+'</div>'
+      +'<div class="quiz-msg-pr" id="msg-'+qid+'"></div>';
     quizAreaPr.appendChild(div);
+  });
+
+  // イベント委譲（Safari対応）
+  quizAreaPr.addEventListener('click',function(e){
+    var btn=e.target.closest('.quiz-choice-pr');
+    if(!btn||btn.classList.contains('disabled'))return;
+    var qid=btn.getAttribute('data-qid');
+    var chosen=parseInt(btn.getAttribute('data-idx'));
+    var ans=parseInt(btn.getAttribute('data-ans'));
+    var exp=btn.getAttribute('data-exp');
+    var card=document.getElementById(qid);
+    card.querySelectorAll('.quiz-choice-pr').forEach(function(b){b.classList.add('disabled');});
+    var msg=document.getElementById('msg-'+qid);
+    if(chosen===ans){btn.classList.add('correct');msg.className='quiz-msg-pr ok';msg.textContent='🎉 正解！ '+exp;}
+    else{btn.classList.add('wrong');card.querySelectorAll('.quiz-choice-pr')[ans].classList.add('correct');msg.className='quiz-msg-pr ng';msg.textContent='✗ '+exp;}
   });
 
   renderPronoun(0);
@@ -3100,14 +3126,6 @@ function renderPronoun(i){
     }).join('');
 }
 
-function prAns(qid,chosen,ans,exp){
-  var card=document.getElementById(qid);
-  card.querySelectorAll('.quiz-choice-pr').forEach(function(b){b.classList.add('disabled');});
-  var btns=card.querySelectorAll('.quiz-choice-pr');
-  var msg=document.getElementById('msg-'+qid);
-  if(chosen===ans){btns[chosen].classList.add('correct');msg.className='quiz-msg-pr ok';msg.textContent='🎉 正解！ '+exp;}
-  else{btns[chosen].classList.add('wrong');btns[ans].classList.add('correct');msg.className='quiz-msg-pr ng';msg.textContent='✗ '+exp;}
-}
 
 })(); // end IIFE
 </script>
