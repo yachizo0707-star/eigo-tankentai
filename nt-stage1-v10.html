@@ -330,6 +330,53 @@ button{cursor:pointer;border:none;background:transparent}
 .tk-ex{background:#F8FAFC;border-radius:9px;padding:9px 11px}
 .tk-ex-en{font-size:.88rem;font-weight:700;line-height:2.0;margin-bottom:2px}
 .tk-ex-ja{font-size:.68rem;color:#64748B}
+/* ===== TESTPREP ===== */
+.tp-tab{flex:1;padding:10px 6px;font-size:.72rem;font-weight:900;background:#fff;color:#EF4444;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center;line-height:1.3;border:none;cursor:pointer;-webkit-appearance:none}
+.tp-tab:not(:last-child){border-right:1.5px solid #EF4444}
+.tp-tab.on{background:#EF4444;color:#fff}
+.tp-q-card{background:#fff;border-radius:16px;border:1px solid #E2E8F0;box-shadow:0 2px 8px rgba(0,0,0,.06);overflow:hidden;margin-bottom:10px}
+.tp-num-tag{display:inline-block;font-size:.65rem;font-weight:900;background:#FEE2E2;color:#EF4444;padding:3px 10px;border-radius:100px;margin:12px 14px 0}
+.tp-ja{padding:8px 14px 0;font-size:.95rem;font-weight:700;line-height:1.7;color:#1E293B}
+.tp-ja-sub{font-size:.82rem;color:#64748B}
+.tp-sf-area{min-height:52px;margin:8px 14px;background:#FEF2F2;border-radius:12px;border:2px dashed #FCA5A5;padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;transition:border-color .2s}
+.tp-sf-area.correct{border-color:#10B981;background:#F0FDF4}
+.tp-sf-area.wrong{border-color:#EF4444}
+.tp-sf-hint{font-size:.72rem;color:#FCA5A5;font-weight:700}
+.tp-chip{background:#EF4444;color:#fff;border-radius:8px;padding:7px 11px;font-size:.88rem;font-weight:800;display:inline-flex;align-items:center;gap:4px;border:none;min-height:38px;cursor:pointer;-webkit-appearance:none}
+.tp-chip:active{opacity:.75}
+.tp-chip-x{font-size:.68rem;opacity:.75}
+.tp-words{display:flex;flex-wrap:wrap;gap:7px;padding:10px 14px 14px}
+.tp-word-btn{background:#fff;border:2px solid #EF4444;border-radius:8px;padding:8px 12px;font-size:.88rem;font-weight:800;color:#EF4444;min-height:42px;-webkit-appearance:none;cursor:pointer}
+.tp-word-btn:active{background:#FEF2F2}
+.tp-word-btn.used{opacity:.28;pointer-events:none;border-color:#CBD5E1;color:#CBD5E1}
+.tp-en-tmpl{margin:10px 14px 8px;background:#FEF2F2;border-radius:10px;padding:10px 12px;font-size:.92rem;font-weight:700;line-height:2.2;color:#334155}
+.tp-en-ans-line{display:block;padding-top:4px;margin-top:2px;border-top:1px dashed #FCA5A5;color:#475569}
+.tp-blank-ph{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:6px;border:2.5px solid #EF4444;background:#fff;color:#EF4444;font-size:1.35rem;font-weight:900;vertical-align:middle;margin:0 2px;line-height:1}
+.tp-hint-row{margin:0 14px 10px;font-size:.75rem;color:#64748B;background:#FAFAFA;border-radius:8px;padding:7px 11px;line-height:1.9;border-left:3px solid #FCA5A5}
+.tp-inputs{display:flex;flex-direction:column;gap:9px;margin:0 14px 12px}
+.tp-inp-row{display:flex;align-items:flex-start;gap:10px}
+.tp-inp-num{font-size:1.55rem;font-weight:900;color:#EF4444;flex:0 0 36px;width:36px;height:46px;display:flex;align-items:center;justify-content:center;line-height:1}
+.tp-inp-col{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.tp-inp{border:2px solid #CBD5E1;border-radius:10px;padding:11px 13px;font-size:16px;font-weight:700;width:100%;outline:none;background:#fff;color:#1E293B;-webkit-appearance:none}
+.tp-inp:focus{border-color:#EF4444;box-shadow:0 0 0 3px rgba(239,68,68,.1)}
+.tp-inp.ok{border-color:#10B981;background:#F0FDF4;color:#10B981}
+.tp-inp.ng{border-color:#EF4444;background:#FEF2F2}
+.tp-hint{font-size:.65rem;color:#64748B;font-weight:700;background:#F1F5F9;padding:2px 9px;border-radius:100px;display:inline-block}
+.tp-fb{min-height:18px;font-size:.8rem;font-weight:700;padding:0 14px 4px;text-align:center}
+.tp-fb.ok{color:#10B981}.tp-fb.ng{color:#EF4444}
+.tp-btns{display:flex;gap:8px;padding:0 14px 14px;flex-wrap:wrap}
+.tp-pat-legend{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.tp-pat-leg{font-size:.62rem;padding:2px 8px;border-radius:100px}
+.tp-pat-card{background:#fff;border-radius:14px;border:1px solid #E2E8F0;box-shadow:0 2px 6px rgba(0,0,0,.04);margin-bottom:10px;overflow:hidden}
+.tp-pat-hdr{padding:11px 13px 7px;display:flex;align-items:center;gap:9px}
+.tp-pat-badge{width:34px;height:34px;border-radius:50%;background:#EF4444;color:#fff;font-size:.78rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tp-pat-title{font-size:.9rem;font-weight:900;color:#1E293B}
+.tp-pat-tip{font-size:.7rem;color:#D97706;font-weight:700;background:#FEF3C7;border-radius:7px;padding:5px 10px;margin:0 13px 8px;line-height:1.6;border-left:3px solid #F59E0B}
+.tp-pat-exs{padding:0 13px 12px;display:flex;flex-direction:column;gap:6px}
+.tp-pat-ex{background:#F8FAFC;border-radius:8px;padding:8px 11px}
+.tp-pat-ex-num{font-size:.6rem;font-weight:700;color:#EF4444;margin-bottom:2px}
+.tp-pat-ex-en{font-size:.88rem;font-weight:700;line-height:2.0;margin-bottom:2px}
+.tp-pat-ex-ja{font-size:.68rem;color:#64748B}
 /* ===== REPORT ===== */
 .rp-main-btn{width:100%;padding:16px;border-radius:16px;background:linear-gradient(135deg,#2563EB,#7C3AED);color:#fff;font-size:1rem;font-weight:900;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:8px;min-height:58px;-webkit-appearance:none;cursor:pointer;border:none}
 .rp-card{background:#fff;border-radius:18px;border:1px solid #E2E8F0;box-shadow:0 4px 16px rgba(0,0,0,.09);overflow:hidden;margin-bottom:12px}
@@ -687,6 +734,33 @@ button{cursor:pointer;border:none;background:transparent}
   </div>
 </div>
 
+<!-- TESTPREP -->
+<div class="page" id="pg-testprep">
+  <div class="ph-wrap">
+    <div class="ph-title" style="color:#EF4444">📋 テスト対策</div>
+    <div class="ph-sub">7th grade can do test 課題（6月29日提出）</div>
+    <!-- モードタブ2段 -->
+    <div style="display:flex;border-radius:12px;overflow:hidden;border:2px solid #EF4444;margin-bottom:5px">
+      <button class="tp-tab on" id="tp-tab1" data-mode="1">①<br>シャッフル</button>
+      <button class="tp-tab" id="tp-tab2" data-mode="2">②<br>穴埋め</button>
+      <button class="tp-tab" id="tp-tab3" data-mode="3">③<br>パターン</button>
+    </div>
+    <div style="display:flex;border-radius:12px;overflow:hidden;border:2px solid #EF4444;margin-bottom:12px">
+      <button class="tp-tab" id="tp-tab4" data-mode="4">④<br>単語カード</button>
+      <button class="tp-tab" id="tp-tab5" data-mode="5">⑤<br>単語テスト</button>
+    </div>
+    <!-- 進捗 -->
+    <div id="tp-prog-wrap">
+      <div style="background:#E2E8F0;height:4px;border-radius:100px;overflow:hidden;margin-bottom:3px"><div id="tp-prog" style="height:100%;background:#EF4444;border-radius:100px;width:0%;transition:width .3s"></div></div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+        <div style="font-size:.63rem;color:#64748B" id="tp-lbl">0 / 0 完了</div>
+        <div style="font-size:.72rem;font-weight:900;color:#EF4444" id="tp-score">✅ 0 / 0</div>
+      </div>
+    </div>
+    <div id="tp-area"></div>
+  </div>
+</div>
+
 <!-- REPORT -->
 <div class="page" id="pg-report">
   <div class="ph-wrap">
@@ -799,6 +873,7 @@ button{cursor:pointer;border:none;background:transparent}
     <div class="hcard" onclick="goPage('plural');closeMore()"><div class="hcard-ico">📚</div><div class="hcard-title">複数の仲間たち</div></div>
     <div class="hcard" onclick="goPage('shuffle');closeMore()"><div class="hcard-ico">🔀</div><div class="hcard-title">例文シャッフル</div></div>
     <div class="hcard" onclick="goPage('toranokan');closeMore()"><div class="hcard-ico">🐯</div><div class="hcard-title">虎の巻</div></div>
+    <div class="hcard" onclick="goPage('testprep');closeMore()"><div class="hcard-ico">📋</div><div class="hcard-title">テスト対策</div></div>
     <div class="hcard" onclick="goPage('report');closeMore()"><div class="hcard-ico">📊</div><div class="hcard-title">報告</div></div>
     <div class="hcard" onclick="goPage('home');closeMore()"><div class="hcard-ico">🏠</div><div class="hcard-title">ホーム</div></div>
   </div>
@@ -4081,6 +4156,410 @@ doRetryCheck=function(){
   addPoint('苦手ノート',allOk,true);
   _origRetry();
 };
+
+/* ===== TESTPREP ===== */
+var tpItems=[
+  {num:1,ja:'私はテニスが好きです。',en:['I','like','tennis','.'],fill:{en:'I [like] tennis.',blanks:[{w:'like',h:'一般動詞「好き」'}]}},
+  {num:2,ja:'私は放課後にテニスの練習をします。',en:['I','practice','tennis','after','school','.'],fill:{en:'I [practice] tennis after school.',blanks:[{w:'practice',h:'練習する'}]}},
+  {num:3,ja:'あなたは上手にサッカーをします。',en:['You','play','soccer','well','.'],fill:{en:'You [play] soccer [well].',blanks:[{w:'play',h:'する・弾く'},{w:'well',h:'上手に'}]}},
+  {num:4,ja:'私は学校で日本語を話しません。',en:['I',"don't",'speak','Japanese','at','school','.'],fill:{en:"I [don't] speak Japanese at school.",blanks:[{w:"don't",h:'一般動詞の否定'}]}},
+  {num:5,ja:'あなたは毎日英語を勉強しますか。',en:['Do','you','study','English','every','day','?'],fill:{en:'[Do] you [study] English every day?',blanks:[{w:'Do',h:'疑問文の始まり'},{w:'study',h:'勉強する'}]}},
+  {num:6,ja:'— はい、勉強します。',en:['Yes',',','I','do','.'],fill:{en:'Yes, I [do].',blanks:[{w:'do',h:'Do疑問文の答え'}]}},
+  {num:7,ja:'あなたは手に何を持っていますか。',en:['What','do','you','have','in','your','hand','?'],fill:{en:'[What] do you have in your hand?',blanks:[{w:'What',h:'何を・何が'}]}},
+  {num:8,ja:'— 私はテニスボールを1こ持っています。',en:['I','have','a','tennis','ball','.'],fill:{en:'I [have] a tennis ball.',blanks:[{w:'have',h:'持っている'}]}},
+  {num:9,ja:'あなたは放課後何をしますか。',en:['What','do','you','do','after','school','?'],fill:{en:'What [do] you [do] after school?',blanks:[{w:'do',h:'疑問文のdo'},{w:'do',h:'する（一般動詞）'}]}},
+  {num:10,ja:'— 私はリサとテニスの練習をします。',en:['I','practice','tennis','with','Lisa','.'],fill:{en:'I practice tennis [with] Lisa.',blanks:[{w:'with',h:'〜と一緒に'}]}},
+  {num:11,ja:'私は本が好きです。',en:['I','like','books','.'],fill:{en:'I like [books].',blanks:[{w:'books',h:'本（複数形）'}]}},
+  {num:12,ja:'私はペンが何本か必要です。',en:['I','need','some','pens','.'],fill:{en:'I need [some] pens.',blanks:[{w:'some',h:'肯定文で「いくつか」'}]}},
+  {num:13,ja:'あなたはペンを何本か持っていますか。',en:['Do','you','have','any','pens','?'],fill:{en:'Do you have [any] pens?',blanks:[{w:'any',h:'疑問文で「いくつか」'}]}},
+  {num:14,ja:'— いいえ、私は1本も（ペンを）持っていません。',en:['No',',',"I","don't",'have','any','pens','.'],fill:{en:"No, I [don't] have [any] pens.",blanks:[{w:"don't",h:'否定'},{w:'any',h:'否定文で「1つも」'}]}},
+  {num:15,ja:'あなたは何本ペンが必要ですか。',en:['How','many','pens','do','you','need','?'],fill:{en:'[How many] pens do you need?',blanks:[{w:'How many',h:'いくつ・何本'}]}},
+  {num:16,ja:'— 2本（ペンが）必要です。',en:['I','need','two','pens','.'],fill:{en:'I need [two] pens.',blanks:[{w:'two',h:'数字の2'}]}},
+  {num:17,ja:'私は新しい本を持っています。これはその本です。',en:['I','have','a','new','book','.','This','is','the','book','.'],fill:{en:'I have a [new] book. This is [the] book.',blanks:[{w:'new',h:'新しい（形容詞）'},{w:'the',h:'特定のものを指す'}]}},
+  {num:18,ja:'私は夕方ピアノを弾きます。',en:['I','play','the','piano','in','the','evening','.'],fill:{en:'I play the piano in [the] evening.',blanks:[{w:'the',h:'楽器の前につける'}]}},
+  {num:19,ja:'カレンと私はクラスメイトです。',en:['Karen','and','I','are','classmates','.'],fill:{en:'Karen and I [are] classmates.',blanks:[{w:'are',h:'weに対応するbe動詞'}]}},
+  {num:20,ja:'私たちはよい友だちです。',en:['We','are','good','friends','.'],fill:{en:'[We] are good friends.',blanks:[{w:'We',h:'私たちは（主語）'}]}},
+  {num:21,ja:'あなたたちはよい野球選手です。',en:['You','are','good','baseball','players','.'],fill:{en:'You [are] good baseball [players].',blanks:[{w:'are',h:'youに対応するbe動詞'},{w:'players',h:'選手（複数形）'}]}},
+  {num:22,ja:'ジョンとボブは野球をします。',en:['John','and','Bob','play','baseball','.'],fill:{en:'John and Bob [play] baseball.',blanks:[{w:'play',h:'する・弾く'}]}},
+  {num:23,ja:'彼らはチームメイトです。',en:['They','are','teammates','.'],fill:{en:'[They] are teammates.',blanks:[{w:'They',h:'彼らは（主語）'}]}},
+  {num:24,ja:'これらは私の兄（弟）のTシャツです。',en:['These','are','my',"brother's",'T-shirts','.'],fill:{en:"[These] are my brother's T-shirts.",blanks:[{w:'These',h:'これらは（複数の近いもの）'}]}},
+  {num:25,ja:'それらは新しいです。',en:['They','are','new','.'],fill:{en:'[They] are new.',blanks:[{w:'They',h:'それら（主語）'}]}},
+  {num:26,ja:'あれらのコートは古いです。',en:['Those','coats','are','old','.'],fill:{en:'[Those] coats are old.',blanks:[{w:'Those',h:'あれらの（遠い複数）'}]}},
+  {num:27,ja:'あの少年はジョンです。',en:['That','boy','is','John','.'],fill:{en:'[That] boy is John.',blanks:[{w:'That',h:'あの・あれ（遠い単数）'}]}},
+  {num:28,ja:'あなたは彼を知っていますか。',en:['Do','you','know','him','?'],fill:{en:'Do you know [him]?',blanks:[{w:'him',h:'彼を（目的格）'}]}},
+  {num:29,ja:'ジョンとボブは放課後私たちと野球をします。',en:['John','and','Bob','play','baseball','with','us','after','school','.'],fill:{en:'John and Bob play baseball with [us] after school.',blanks:[{w:'us',h:'私たちを（目的格）'}]}},
+];
+
+var tpWords=[
+  {en:'like',ja:'好き・好む',hint:'動詞'},{en:'practice',ja:'練習する',hint:'動詞'},
+  {en:'play',ja:'する・弾く・遊ぶ',hint:'動詞'},{en:'speak',ja:'話す',hint:'動詞'},
+  {en:'study',ja:'勉強する',hint:'動詞'},{en:'have',ja:'持っている',hint:'動詞'},
+  {en:'need',ja:'必要とする',hint:'動詞'},{en:'do',ja:'する',hint:'動詞'},
+  {en:'know',ja:'知っている',hint:'動詞'},{en:'tennis',ja:'テニス',hint:'名詞'},
+  {en:'soccer',ja:'サッカー',hint:'名詞'},{en:'baseball',ja:'野球',hint:'名詞'},
+  {en:'piano',ja:'ピアノ',hint:'名詞・楽器'},{en:'book',ja:'本',hint:'名詞'},
+  {en:'books',ja:'本（複数）',hint:'名詞'},{en:'pen',ja:'ペン',hint:'名詞'},
+  {en:'pens',ja:'ペン（複数）',hint:'名詞'},{en:'hand',ja:'手',hint:'名詞'},
+  {en:'ball',ja:'ボール',hint:'名詞'},{en:'school',ja:'学校',hint:'名詞'},
+  {en:'evening',ja:'夕方・夜',hint:'名詞'},{en:'friend',ja:'友だち',hint:'名詞'},
+  {en:'friends',ja:'友だち（複数）',hint:'名詞'},{en:'player',ja:'選手',hint:'名詞'},
+  {en:'players',ja:'選手（複数）',hint:'名詞'},{en:'teammate',ja:'チームメイト',hint:'名詞'},
+  {en:'classmate',ja:'クラスメイト',hint:'名詞'},{en:'him',ja:'彼を（目的格）',hint:'代名詞'},
+  {en:'us',ja:'私たちを（目的格）',hint:'代名詞'},{en:'good',ja:'よい・上手な',hint:'形容詞'},
+  {en:'new',ja:'新しい',hint:'形容詞'},{en:'old',ja:'古い',hint:'形容詞'},
+  {en:'well',ja:'上手に・よく',hint:'副詞'},{en:'some',ja:'いくつかの（肯定文）',hint:'数量詞'},
+  {en:'any',ja:'いくつかの（疑問・否定）',hint:'数量詞'},{en:'with',ja:'〜と一緒に',hint:'前置詞'},
+  {en:'after',ja:'〜の後に',hint:'前置詞'},
+];
+
+var tpColored={
+  1:[['ws','I'],['wv','like'],['wo','tennis'],['wg','.']],
+  2:[['ws','I'],['wv','practice'],['wo','tennis'],['wg','after school .']],
+  3:[['ws','You'],['wv','play'],['wo','soccer'],['wg','well .']],
+  4:[['ws','I'],['wn',"don't"],['wv','speak'],['wo','Japanese'],['wg','at school .']],
+  5:[['wq','Do'],['ws','you'],['wv','study'],['wo','English'],['wg','every day ?']],
+  6:[['wg','Yes ,'],['ws','I'],['wq','do'],['wg','.']],
+  7:[['wg','What'],['wq','do'],['ws','you'],['wv','have'],['wg','in your hand ?']],
+  8:[['ws','I'],['wv','have'],['wg','a'],['wo','tennis ball'],['wg','.']],
+  9:[['wg','What'],['wq','do'],['ws','you'],['wv','do'],['wg','after school ?']],
+  10:[['ws','I'],['wv','practice'],['wo','tennis'],['wg','with Lisa .']],
+  11:[['ws','I'],['wv','like'],['wo','books'],['wg','.']],
+  12:[['ws','I'],['wv','need'],['wg','some'],['wo','pens'],['wg','.']],
+  13:[['wq','Do'],['ws','you'],['wv','have'],['wg','any'],['wo','pens'],['wg','?']],
+  14:[['wg','No ,'],['ws','I'],['wn',"don't"],['wv','have'],['wg','any'],['wo','pens'],['wg','.']],
+  15:[['wg','How many'],['wo','pens'],['wq','do'],['ws','you'],['wv','need'],['wg','?']],
+  16:[['ws','I'],['wv','need'],['wg','two'],['wo','pens'],['wg','.']],
+  17:[['ws','I'],['wv','have'],['wg','a new'],['wo','book'],['wg','.'],['ws','This'],['wv','is'],['wg','the'],['wo','book'],['wg','.']],
+  18:[['ws','I'],['wv','play'],['wg','the'],['wo','piano'],['wg','in the evening .']],
+  19:[['ws','Karen and I'],['wv','are'],['wo','classmates'],['wg','.']],
+  20:[['ws','We'],['wv','are'],['wg','good'],['wo','friends'],['wg','.']],
+  21:[['ws','You'],['wv','are'],['wg','good'],['wo','baseball players'],['wg','.']],
+  22:[['ws','John and Bob'],['wv','play'],['wo','baseball'],['wg','.']],
+  23:[['ws','They'],['wv','are'],['wo','teammates'],['wg','.']],
+  24:[['ws','These'],['wv','are'],['ws','my'],['wo',"brother's T-shirts"],['wg','.']],
+  25:[['ws','They'],['wv','are'],['wg','new'],['wg','.']],
+  26:[['ws','Those coats'],['wv','are'],['wg','old'],['wg','.']],
+  27:[['ws','That boy'],['wv','is'],['wo','John'],['wg','.']],
+  28:[['wq','Do'],['ws','you'],['wv','know'],['wo','him'],['wg','?']],
+  29:[['ws','John and Bob'],['wv','play'],['wo','baseball'],['wg','with'],['ws','us'],['wg','after school .']],
+};
+
+var tpPatterns=[
+  {patNum:2,title:'be動詞：are/is',tip:'複数・you→are / he・she・it→is！',nums:[19,20,21,23,24,25,26,27]},
+  {patNum:5,title:'一般動詞',tip:'動詞はbe動詞とは別グループ！主語の次に置く！',nums:[1,2,3,8,10,11,12,18,22]},
+  {patNum:6,title:'Do疑問文',tip:'一般動詞の疑問文は Do を文頭に！動詞は原形！',nums:[5,6,13,14,28]},
+  {patNum:24,title:'疑問詞：What/How many',tip:'疑問詞を文頭に置く！',nums:[7,9,15]},
+  {patNum:29,title:'some / any',tip:'肯定文→some / 否定・疑問→any！',nums:[12,13,14]},
+];
+
+var tpMode=1,tpSFItems=[],tpSFIdx=0,tpSFCorrect=0,tpSFAnswered=[];
+var tpFItems=[],tpFIdx=0,tpFCorrect=0;
+var tpFCWords=[],tpFCIdx=0,tpFCFlipped=false,tpFCMode='ja2en';
+var tpWTWords=[],tpWTIdx=0,tpWTCorrect=0;
+var tpCircle=['①','②','③','④','⑤'];
+
+function tpUpdateProg(idx,total,correct){
+  document.getElementById('tp-prog').style.width=(total>0?(idx/total*100):0)+'%';
+  document.getElementById('tp-lbl').textContent=idx+' / '+total+' 完了';
+  document.getElementById('tp-score').textContent='✅ '+correct+' / '+idx;
+}
+function tpJaLines(ja){
+  return ja.split('\n').map(function(l,i){return i===0?esc(l):'<span class="tp-ja-sub">'+esc(l)+'</span>';}).join('<br>');
+}
+function tpBuildColored(num){
+  var ws=tpColored[num];if(!ws)return '';
+  return ws.map(function(w){return '<span class="'+w[0]+'">'+esc(w[1])+'</span>';}).join(' ');
+}
+function tpShowResult(correct,total,mode){
+  var pct=Math.round(correct/total*100);
+  document.getElementById('tp-area').innerHTML='<div style="background:#fff;border-radius:16px;border:1px solid #E2E8F0;padding:28px 16px;text-align:center">'
+    +'<div style="font-size:2.5rem;margin-bottom:8px">'+(pct>=80?'🎉':pct>=50?'😊':'💪')+'</div>'
+    +'<div style="font-size:1rem;font-weight:900;margin-bottom:4px">'+(pct>=80?'すごい！':'よくがんばりました！')+'</div>'
+    +'<div style="font-size:.8rem;color:#64748B;margin-bottom:16px">'+correct+' / '+total+' 問正解（'+pct+'%）</div>'
+    +'<button class="btn btn-red" id="tp-retry" style="margin:0 auto">もう一度</button></div>';
+  document.getElementById('tp-retry').addEventListener('click',function(){tpSwitchMode(mode);});
+}
+
+// ①シャッフル
+function tpRenderSF(){
+  var area=document.getElementById('tp-area');
+  document.getElementById('tp-prog-wrap').style.display='block';
+  tpUpdateProg(tpSFIdx,tpSFItems.length,tpSFCorrect);
+  if(tpSFIdx>=tpSFItems.length){tpShowResult(tpSFCorrect,tpSFItems.length,1);return;}
+  var item=tpSFItems[tpSFIdx];
+  var shuffled=shuffle(item.en.slice());
+  tpSFAnswered=[];
+  var wbtns=shuffled.map(function(w,i){return '<button class="tp-word-btn" data-sfidx="'+i+'" data-word="'+esc(w)+'">'+esc(w)+'</button>';}).join('');
+  area.innerHTML='<div class="tp-q-card">'
+    +'<span class="tp-num-tag">No.'+item.num+'</span>'
+    +'<div class="tp-ja">🇯🇵 '+tpJaLines(item.ja)+'</div>'
+    +'<div class="tp-sf-area" id="tp-sf-area"><span class="tp-sf-hint" id="tp-sf-hint">← 下の単語をタップして並べよう</span></div>'
+    +'<div class="tp-words" id="tp-sf-words">'+wbtns+'</div>'
+    +'<div class="tp-fb" id="tp-fb"></div>'
+    +'<div class="tp-btns">'
+    +'<button class="btn btn-red" id="tp-sf-check">確認 ✓</button>'
+    +'<button class="btn btn-ghost" id="tp-sf-clr">✕ リセット</button>'
+    +'<button class="btn btn-ghost" id="tp-sf-skip">スキップ →</button>'
+    +'</div></div>';
+  document.getElementById('tp-sf-words').addEventListener('click',function(e){
+    var btn=e.target.closest('.tp-word-btn');if(!btn||btn.classList.contains('used'))return;
+    var w=btn.getAttribute('data-word');var si=btn.getAttribute('data-sfidx');
+    btn.classList.add('used');tpSFAnswered.push({word:w,sidx:si});
+    var hint=document.getElementById('tp-sf-hint');if(hint)hint.style.display='none';
+    var chip=document.createElement('button');chip.className='tp-chip';chip.setAttribute('data-csidx',si);
+    chip.innerHTML=esc(w)+'<span class="tp-chip-x">✕</span>';
+    document.getElementById('tp-sf-area').appendChild(chip);
+  });
+  document.getElementById('tp-sf-area').addEventListener('click',function(e){
+    var chip=e.target.closest('.tp-chip');if(!chip)return;
+    var si=chip.getAttribute('data-csidx');chip.remove();
+    var wb=document.querySelector('.tp-word-btn[data-sfidx="'+si+'"]');if(wb)wb.classList.remove('used');
+    tpSFAnswered=tpSFAnswered.filter(function(a){return a.sidx!==si;});
+    if(tpSFAnswered.length===0){var h=document.getElementById('tp-sf-hint');if(h)h.style.display='';}
+  });
+  document.getElementById('tp-sf-check').addEventListener('click',function(){
+    var ans=tpSFAnswered.map(function(a){return a.word;}).join(' ');
+    var correct=item.en.join(' ');
+    var fb=document.getElementById('tp-fb');var sfArea=document.getElementById('tp-sf-area');
+    if(tpSFAnswered.length===0){fb.className='tp-fb ng';fb.textContent='単語をタップして並べてね！';return;}
+    if(ans===correct){
+      sfArea.className='tp-sf-area correct';fb.className='tp-fb ok';fb.textContent='🎉 正解！';tpSFCorrect++;
+      addPoint('テスト対策',true,false);
+      document.getElementById('tp-sf-check').style.display='none';document.getElementById('tp-sf-clr').style.display='none';document.getElementById('tp-sf-skip').style.display='none';
+      var nb=document.createElement('button');nb.className='btn btn-blue';nb.textContent='次へ →';nb.style.minHeight='46px';
+      nb.addEventListener('click',function(){tpSFIdx++;tpRenderSF();});document.querySelector('#tp-area .tp-btns').appendChild(nb);
+    } else {
+      sfArea.className='tp-sf-area wrong';fb.className='tp-fb ng';fb.textContent='✗ もう一度並べてみよう！';
+      addPoint('テスト対策',false,false);
+      setTimeout(function(){var f=document.getElementById('tp-fb');if(f&&f.classList.contains('ng'))f.textContent='✗ 正解：'+correct;},1500);
+    }
+  });
+  document.getElementById('tp-sf-clr').addEventListener('click',function(){
+    tpSFAnswered=[];
+    document.getElementById('tp-sf-area').querySelectorAll('.tp-chip').forEach(function(c){c.remove();});
+    document.querySelectorAll('.tp-word-btn').forEach(function(b){b.classList.remove('used');});
+    var h=document.getElementById('tp-sf-hint');if(h)h.style.display='';
+    var fb=document.getElementById('tp-fb');fb.textContent='';fb.className='tp-fb';
+    document.getElementById('tp-sf-area').className='tp-sf-area';
+  });
+  document.getElementById('tp-sf-skip').addEventListener('click',function(){tpSFIdx++;tpRenderSF();});
+}
+
+// ②穴埋め
+function tpRenderFill(){
+  var area=document.getElementById('tp-area');
+  document.getElementById('tp-prog-wrap').style.display='block';
+  tpUpdateProg(tpFIdx,tpFItems.length,tpFCorrect);
+  if(tpFIdx>=tpFItems.length){tpShowResult(tpFCorrect,tpFItems.length,2);return;}
+  var item=tpFItems[tpFIdx];var f=item.fill;var blanks=f.blanks;
+  var bi=0;
+  var tHTML=f.en.replace(/\[([^\]]+)\]/g,function(){var n=tpCircle[bi]||('('+(bi+1)+')');bi++;return '<span class="tp-blank-ph">'+n+'</span>';});
+  tHTML=tHTML.replace(/\s*—\s*/,'<span class="tp-en-ans-line">— ');
+  if(tHTML.indexOf('<span class="tp-en-ans-line">')!==-1)tHTML+='</span>';
+  var jaAns=blanks.map(function(b,i){return '<b>'+(tpCircle[i]||('('+(i+1)+')'))+'</b>＝'+esc(b.h);}).join('　');
+  var inputsHTML=blanks.map(function(b,i){
+    return '<div class="tp-inp-row">'
+      +'<div class="tp-inp-num">'+(tpCircle[i]||('('+(i+1)+')'))+'</div>'
+      +'<div class="tp-inp-col">'
+      +'<input class="tp-inp" id="tp-inp-'+i+'" placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">'
+      +'<span class="tp-hint">'+esc(b.h)+'</span>'
+      +'</div></div>';
+  }).join('');
+  area.innerHTML='<div class="tp-q-card">'
+    +'<span class="tp-num-tag">No.'+item.num+'</span>'
+    +'<div class="tp-ja">🇯🇵 '+tpJaLines(item.ja)+'</div>'
+    +'<div class="tp-en-tmpl">'+tHTML+'</div>'
+    +'<div class="tp-hint-row">💬 '+jaAns+'</div>'
+    +'<div class="tp-inputs">'+inputsHTML+'</div>'
+    +'<div class="tp-fb" id="tp-fb"></div>'
+    +'<div class="tp-btns">'
+    +'<button class="btn btn-red" id="tp-fill-check">確認 ✓</button>'
+    +'<button class="btn btn-ghost" id="tp-fill-skip">スキップ →</button>'
+    +'</div></div>';
+  var inps=area.querySelectorAll('.tp-inp');
+  inps.forEach(function(inp,i){inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();if(i<inps.length-1)inps[i+1].focus();else tpDoFill();}});});
+  document.getElementById('tp-fill-check').addEventListener('click',tpDoFill);
+  document.getElementById('tp-fill-skip').addEventListener('click',function(){tpFIdx++;tpRenderFill();});
+}
+function tpDoFill(){
+  var item=tpFItems[tpFIdx];var blanks=item.fill.blanks;var allOk=true;
+  blanks.forEach(function(b,i){
+    var inp=document.getElementById('tp-inp-'+i);if(!inp)return;
+    inp.classList.remove('ok','ng');
+    if(inp.value.trim().toLowerCase()===b.w.toLowerCase()){inp.classList.add('ok');}else{inp.classList.add('ng');allOk=false;}
+  });
+  var fb=document.getElementById('tp-fb');
+  if(allOk){
+    fb.className='tp-fb ok';fb.textContent='🎉 正解！';tpFCorrect++;addPoint('テスト対策',true,false);
+    document.getElementById('tp-fill-check').style.display='none';document.getElementById('tp-fill-skip').style.display='none';
+    var nb=document.createElement('button');nb.className='btn btn-blue';nb.textContent='次へ →';nb.style.minHeight='46px';
+    nb.addEventListener('click',function(){tpFIdx++;tpRenderFill();});document.querySelector('#tp-area .tp-btns').appendChild(nb);
+  } else {
+    var ans=blanks.map(function(b,i){return (tpCircle[i]||('('+(i+1)+')'))+'='+b.w;}).join('　');
+    fb.className='tp-fb ng';fb.textContent='✗ 正解：'+ans;addPoint('テスト対策',false,false);
+    document.getElementById('tp-fill-check').style.display='none';document.getElementById('tp-fill-skip').style.display='none';
+    var nb=document.createElement('button');nb.className='btn btn-ghost';nb.textContent='次へ →';nb.style.minHeight='46px';
+    nb.addEventListener('click',function(){tpFIdx++;tpRenderFill();});document.querySelector('#tp-area .tp-btns').appendChild(nb);
+  }
+}
+
+// ③パターン
+function tpRenderPattern(){
+  document.getElementById('tp-prog-wrap').style.display='none';
+  var area=document.getElementById('tp-area');
+  var html='<div class="tp-pat-legend">'
+    +'<span class="tp-pat-leg ws">主語</span>'
+    +'<span class="tp-pat-leg wv">動詞</span>'
+    +'<span class="tp-pat-leg wo">目的語</span>'
+    +'<span class="tp-pat-leg wq">助動詞</span>'
+    +'<span class="tp-pat-leg wn">否定</span>'
+    +'<span class="tp-pat-leg wg">その他</span>'
+    +'</div>';
+  tpPatterns.forEach(function(p){
+    html+='<div class="tp-pat-card">'
+      +'<div class="tp-pat-hdr"><div class="tp-pat-badge">'+p.patNum+'</div><div class="tp-pat-title">'+esc(p.title)+'</div></div>'
+      +'<div class="tp-pat-tip">'+esc(p.tip)+'</div>'
+      +'<div class="tp-pat-exs">';
+    p.nums.forEach(function(n){
+      var it=tpItems.find(function(x){return x.num===n;});if(!it)return;
+      html+='<div class="tp-pat-ex">'
+        +'<div class="tp-pat-ex-num">No.'+it.num+'</div>'
+        +'<div class="tp-pat-ex-en">'+tpBuildColored(it.num)+'</div>'
+        +'<div class="tp-pat-ex-ja">'+esc(it.ja)+'</div>'
+        +'</div>';
+    });
+    html+='</div></div>';
+  });
+  area.innerHTML=html;
+}
+
+// ④単語カード
+function tpRenderFC(){
+  var area=document.getElementById('tp-area');
+  document.getElementById('tp-prog-wrap').style.display='block';
+  if(tpFCIdx>=tpFCWords.length){
+    area.innerHTML='<div style="background:#fff;border-radius:16px;border:1px solid #E2E8F0;padding:28px 16px;text-align:center">'
+      +'<div style="font-size:2.5rem;margin-bottom:8px">🎉</div>'
+      +'<div style="font-size:1rem;font-weight:900;margin-bottom:16px">全部チェックしたよ！</div>'
+      +'<button class="btn btn-red" id="tp-fc-retry" style="margin:0 auto">もう一度</button></div>';
+    document.getElementById('tp-fc-retry').addEventListener('click',function(){tpFCIdx=0;tpFCWords=shuffle(tpWords.slice());tpRenderFC();});
+    return;
+  }
+  tpUpdateProg(tpFCIdx,tpFCWords.length,0);
+  var w=tpFCWords[tpFCIdx];tpFCFlipped=false;
+  var isJa=tpFCMode==='ja2en';
+  var frontLbl=isJa?'日本語':'英語';
+  var frontTxt=isJa?esc(w.ja):('<span style="font-size:1.8rem;font-weight:900;color:#EF4444">'+esc(w.en)+'</span>');
+  var backLbl=isJa?'英語':'日本語';
+  var backTxt=isJa?('<span style="font-size:1.8rem;font-weight:900;color:#EF4444">'+esc(w.en)+'</span>'):('<span style="font-size:1.4rem;font-weight:900;color:#1E293B">'+esc(w.ja)+'</span>');
+  area.innerHTML=
+    '<div style="display:flex;border-radius:100px;overflow:hidden;border:2px solid #EF4444;margin-bottom:10px">'
+    +'<button id="tp-fc-sw-ja" style="flex:1;padding:11px;font-size:.8rem;font-weight:900;border:none;cursor:pointer;-webkit-appearance:none;background:'+(isJa?'#EF4444':'#fff')+';color:'+(isJa?'#fff':'#EF4444')+'">🇯🇵 日→英</button>'
+    +'<button id="tp-fc-sw-en" style="flex:1;padding:11px;font-size:.8rem;font-weight:900;border:none;cursor:pointer;-webkit-appearance:none;background:'+(isJa?'#fff':'#EF4444')+';color:'+(isJa?'#EF4444':'#fff')+'">🇬🇧 英→日</button>'
+    +'</div>'
+    +'<div class="tp-q-card" style="cursor:pointer" id="tp-fc-card">'
+    +'<div style="padding:12px 14px 4px;font-size:.63rem;font-weight:700;color:#64748B">'+esc(w.hint)+'</div>'
+    +'<div style="padding:8px 14px 24px;text-align:center">'
+    +'<div style="font-size:.78rem;color:#94A3B8;margin-bottom:8px">'+frontLbl+'</div>'
+    +'<div style="font-size:1.4rem;font-weight:900;color:#1E293B;margin-bottom:12px">'+frontTxt+'</div>'
+    +'<div id="tp-fc-ans" style="display:none">'
+    +'<div style="font-size:.78rem;color:#94A3B8;margin-bottom:4px">'+backLbl+'</div>'
+    +'<div>'+backTxt+'</div>'
+    +'</div>'
+    +'<div id="tp-fc-hint" style="font-size:.72rem;color:#94A3B8;margin-top:12px">👆 タップして'+backLbl+'を確認</div>'
+    +'</div>'
+    +'<div class="tp-btns" id="tp-fc-btns" style="display:none">'
+    +'<button class="btn btn-red" id="tp-fc-ok">✅ 覚えた！</button>'
+    +'<button class="btn btn-ghost" id="tp-fc-ng">🔁 もう一度</button>'
+    +'</div></div>';
+  document.getElementById('tp-fc-sw-ja').addEventListener('click',function(){tpFCMode='ja2en';tpFCIdx=0;tpFCWords=shuffle(tpWords.slice());tpRenderFC();});
+  document.getElementById('tp-fc-sw-en').addEventListener('click',function(){tpFCMode='en2ja';tpFCIdx=0;tpFCWords=shuffle(tpWords.slice());tpRenderFC();});
+  document.getElementById('tp-fc-card').addEventListener('click',function(e){
+    if(e.target.closest('.tp-btns')||e.target.closest('button'))return;
+    if(!tpFCFlipped){
+      tpFCFlipped=true;
+      document.getElementById('tp-fc-ans').style.display='block';
+      document.getElementById('tp-fc-hint').style.display='none';
+      document.getElementById('tp-fc-btns').style.display='flex';
+    }
+  });
+  document.getElementById('tp-fc-ok').addEventListener('click',function(e){e.stopPropagation();tpFCIdx++;tpRenderFC();});
+  document.getElementById('tp-fc-ng').addEventListener('click',function(e){
+    e.stopPropagation();var wx=tpFCWords.splice(tpFCIdx,1)[0];tpFCWords.push(wx);tpRenderFC();
+  });
+}
+
+// ⑤単語テスト
+function tpRenderWT(){
+  var area=document.getElementById('tp-area');
+  document.getElementById('tp-prog-wrap').style.display='block';
+  tpUpdateProg(tpWTIdx,tpWTWords.length,tpWTCorrect);
+  if(tpWTIdx>=tpWTWords.length){tpShowResult(tpWTCorrect,tpWTWords.length,5);return;}
+  var w=tpWTWords[tpWTIdx];
+  area.innerHTML='<div class="tp-q-card">'
+    +'<div style="padding:12px 14px 4px;font-size:.63rem;font-weight:700;color:#64748B">'+esc(w.hint)+'</div>'
+    +'<div style="padding:8px 14px 16px;text-align:center">'
+    +'<div style="font-size:.75rem;color:#94A3B8;margin-bottom:6px">日本語 → 英語で入力</div>'
+    +'<div style="font-size:1.3rem;font-weight:900;color:#1E293B">'+esc(w.ja)+'</div>'
+    +'</div>'
+    +'<div style="padding:0 14px 12px">'
+    +'<input id="tp-wt-inp" class="tp-inp" placeholder="英語で入力…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">'
+    +'</div>'
+    +'<div class="tp-fb" id="tp-fb"></div>'
+    +'<div class="tp-btns">'
+    +'<button class="btn btn-red" id="tp-wt-check">確認 ✓</button>'
+    +'<button class="btn btn-ghost" id="tp-wt-skip">スキップ →</button>'
+    +'</div></div>';
+  var inp=document.getElementById('tp-wt-inp');
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();tpDoWT();}});
+  document.getElementById('tp-wt-check').addEventListener('click',tpDoWT);
+  document.getElementById('tp-wt-skip').addEventListener('click',function(){tpWTIdx++;tpRenderWT();});
+}
+function tpDoWT(){
+  var w=tpWTWords[tpWTIdx];
+  var inp=document.getElementById('tp-wt-inp');
+  var val=inp.value.trim().toLowerCase();var ans=w.en.toLowerCase();
+  var fb=document.getElementById('tp-fb');
+  inp.classList.remove('ok','ng');
+  if(val===''){fb.className='tp-fb ng';fb.textContent='スペルを入力してね！';return;}
+  if(val===ans){
+    inp.classList.add('ok');fb.className='tp-fb ok';fb.textContent='🎉 正解！ '+w.en;
+    tpWTCorrect++;addPoint('テスト対策',true,false);
+    document.getElementById('tp-wt-check').style.display='none';document.getElementById('tp-wt-skip').style.display='none';
+    var nb=document.createElement('button');nb.className='btn btn-blue';nb.textContent='次へ →';nb.style.minHeight='46px';
+    nb.addEventListener('click',function(){tpWTIdx++;tpRenderWT();});document.querySelector('#tp-area .tp-btns').appendChild(nb);
+  } else {
+    inp.classList.add('ng');fb.className='tp-fb ng';fb.textContent='✗ 正解は「'+w.en+'」';
+    addPoint('テスト対策',false,false);
+    document.getElementById('tp-wt-check').style.display='none';document.getElementById('tp-wt-skip').style.display='none';
+    var nb=document.createElement('button');nb.className='btn btn-ghost';nb.textContent='次へ →';nb.style.minHeight='46px';
+    nb.addEventListener('click',function(){tpWTIdx++;tpRenderWT();});document.querySelector('#tp-area .tp-btns').appendChild(nb);
+  }
+}
+
+// タブ切替
+function tpSwitchMode(m){
+  tpMode=m;
+  [1,2,3,4,5].forEach(function(i){
+    var t=document.getElementById('tp-tab'+i);if(t)t.classList.toggle('on',i===m);
+  });
+  if(m===1){tpSFItems=shuffle(tpItems.slice());tpSFIdx=0;tpSFCorrect=0;tpRenderSF();}
+  else if(m===2){tpFItems=shuffle(tpItems.slice());tpFIdx=0;tpFCorrect=0;tpRenderFill();}
+  else if(m===3){tpRenderPattern();}
+  else if(m===4){tpFCWords=shuffle(tpWords.slice());tpFCIdx=0;tpRenderFC();}
+  else if(m===5){tpWTWords=shuffle(tpWords.slice());tpWTIdx=0;tpWTCorrect=0;tpRenderWT();}
+}
+
+// タブイベント登録
+[1,2,3,4,5].forEach(function(i){
+  var t=document.getElementById('tp-tab'+i);
+  if(t)t.addEventListener('click',function(e){
+    e.preventDefault();var sy=window.scrollY||window.pageYOffset;
+    tpSwitchMode(i);window.scrollTo(0,sy);
+  });
+});
+// 初期表示
+tpSFItems=shuffle(tpItems.slice());tpRenderSF();
 
 })(); // end IIFE
 </script>
